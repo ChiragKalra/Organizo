@@ -64,6 +64,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
     private var mShouldStopFetching = false
     private var mIsSearchOpen = false
     private var mWasDefaultFolderChecked = false
+    private var mWasMediaManagementPromptShown = false
     private var mLatestMediaId = 0L
     private var mLatestMediaDateId = 0L
     private var mCurrentPathPrefix = ""                 // used at "Group direct subfolders" for navigation
@@ -91,6 +92,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
 
         if (savedInstanceState == null) {
             config.temporarilyShowHidden = false
+            config.temporarilyShowExcluded = false
             config.tempSkipDeleteConfirmation = false
             removeTempFolder()
             checkRecycleBinItems()
@@ -145,10 +147,23 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
         }
 
         // just request the permission, tryLoadGallery will then trigger in onResume
-        handlePermission(PERMISSION_WRITE_STORAGE) {
+        handleMediaPermissions {
             if (!it) {
                 toast(R.string.no_storage_permissions)
                 finish()
+            }
+        }
+    }
+
+    private fun handleMediaPermissions(callback: (granted: Boolean) -> Unit) {
+        handlePermission(PERMISSION_WRITE_STORAGE) { granted ->
+            callback(granted)
+            if (granted && isRPlus()) {
+                handlePermission(PERMISSION_MEDIA_LOCATION) {}
+                if (!mWasMediaManagementPromptShown) {
+                    mWasMediaManagementPromptShown = true
+                    handleMediaManagementPrompt { }
+                }
             }
         }
     }
@@ -203,6 +218,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
         directories_empty_placeholder_2.setTextColor(primaryColor)
         directories_switch_searching.setTextColor(primaryColor)
         directories_switch_searching.underlineText()
+        directories_empty_placeholder_2.bringToFront()
 
         if (!mIsSearchOpen) {
             invalidateOptionsMenu()
@@ -233,9 +249,10 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
     override fun onStop() {
         super.onStop()
 
-        if (config.temporarilyShowHidden || config.tempSkipDeleteConfirmation) {
+        if (config.temporarilyShowHidden || config.tempSkipDeleteConfirmation || config.temporarilyShowExcluded) {
             mTempShowHiddenHandler.postDelayed({
                 config.temporarilyShowHidden = false
+                config.temporarilyShowExcluded = false
                 config.tempSkipDeleteConfirmation = false
             }, SHOW_TEMP_HIDDEN_DURATION)
         } else {
@@ -247,6 +264,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
         super.onDestroy()
         if (!isChangingConfigurations) {
             config.temporarilyShowHidden = false
+            config.temporarilyShowExcluded = false
             config.tempSkipDeleteConfirmation = false
             mTempShowHiddenHandler.removeCallbacksAndMessages(null)
             removeTempFolder()
@@ -285,13 +303,15 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
                 findItem(R.id.hide_the_recycle_bin).isVisible = useBin && config.showRecycleBinAtFolders
                 findItem(R.id.show_the_recycle_bin).isVisible = useBin && !config.showRecycleBinAtFolders
                 findItem(R.id.set_as_default_folder).isVisible = !config.defaultFolder.isEmpty()
-                findItem(R.id.create_new_folder).isVisible = !isRPlus()
                 setupSearch(this)
             }
         }
 
-        menu.findItem(R.id.temporarily_show_hidden).isVisible = !isRPlus() && !config.shouldShowHidden
-        menu.findItem(R.id.stop_showing_hidden).isVisible = !isRPlus() && config.temporarilyShowHidden
+        menu.findItem(R.id.temporarily_show_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && !config.shouldShowHidden
+        menu.findItem(R.id.stop_showing_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && config.temporarilyShowHidden
+
+        menu.findItem(R.id.temporarily_show_excluded).isVisible = !menu.findItem(R.id.temporarily_show_hidden).isVisible && !config.temporarilyShowExcluded
+        menu.findItem(R.id.stop_showing_excluded).isVisible = !menu.findItem(R.id.temporarily_show_hidden).isVisible && config.temporarilyShowExcluded
 
         updateMenuItemColors(menu)
         return true
@@ -306,6 +326,8 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             R.id.change_view_type -> changeViewType()
             R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
             R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
+            R.id.temporarily_show_excluded -> tryToggleTemporarilyShowExcluded()
+            R.id.stop_showing_excluded -> tryToggleTemporarilyShowExcluded()
             R.id.create_new_folder -> createNewFolder()
             R.id.show_the_recycle_bin -> toggleRecycleBin(true)
             R.id.hide_the_recycle_bin -> toggleRecycleBin(false)
@@ -435,9 +457,9 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
     private fun tryLoadGallery() {
         // avoid calling anything right after granting the permission, it will be called from onResume()
         val wasMissingPermission = config.appRunCount == 1 && !hasPermission(PERMISSION_WRITE_STORAGE)
-        handlePermission(PERMISSION_WRITE_STORAGE) {
+        handleMediaPermissions {
             if (wasMissingPermission) {
-                return@handlePermission
+                return@handleMediaPermissions
             }
 
             if (it) {
@@ -551,6 +573,24 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
     private fun toggleTemporarilyShowHidden(show: Boolean) {
         mLoadedInitialPhotos = false
         config.temporarilyShowHidden = show
+        directories_grid.adapter = null
+        getDirectories()
+        invalidateOptionsMenu()
+    }
+
+    private fun tryToggleTemporarilyShowExcluded() {
+        if (config.temporarilyShowExcluded) {
+            toggleTemporarilyShowExcluded(false)
+        } else {
+            handleExcludedFolderPasswordProtection {
+                toggleTemporarilyShowExcluded(true)
+            }
+        }
+    }
+
+    private fun toggleTemporarilyShowExcluded(show: Boolean) {
+        mLoadedInitialPhotos = false
+        config.temporarilyShowExcluded = show
         directories_grid.adapter = null
         getDirectories()
         invalidateOptionsMenu()
@@ -892,14 +932,17 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
         val dateTakens = mLastMediaFetcher!!.getDateTakens()
 
         if (config.showRecycleBinAtFolders && !config.showRecycleBinLast && !dirs.map { it.path }.contains(RECYCLE_BIN)) {
-            if (mediaDB.getDeletedMediaCount() > 0) {
-                val recycleBin = Directory().apply {
-                    path = RECYCLE_BIN
-                    name = getString(R.string.recycle_bin)
-                    location = LOCATION_INTERNAL
-                }
+            try {
+                if (mediaDB.getDeletedMediaCount() > 0) {
+                    val recycleBin = Directory().apply {
+                        path = RECYCLE_BIN
+                        name = getString(R.string.recycle_bin)
+                        location = LOCATION_INTERNAL
+                    }
 
-                dirs.add(0, recycleBin)
+                    dirs.add(0, recycleBin)
+                }
+            } catch (ignored: Exception) {
             }
         }
 
@@ -915,7 +958,8 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             }
         }
 
-        val android11Files = mLastMediaFetcher?.getAndroid11FolderMedia(getImagesOnly, getVideosOnly, favoritePaths, false)
+        // fetch files from MediaStore only, unless the app has the MANAGE_EXTERNAL_STORAGE permission on Android 11+
+        val android11Files = mLastMediaFetcher?.getAndroid11FolderMedia(getImagesOnly, getVideosOnly, favoritePaths, false, true, dateTakens)
         try {
             for (directory in dirs) {
                 if (mShouldStopFetching || isDestroyed || isFinishing) {
@@ -1147,7 +1191,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             directories_empty_placeholder.text = getString(R.string.no_items_found)
             directories_empty_placeholder_2.beGone()
         } else if (dirs.isEmpty() && config.filterMedia == getDefaultFileFilter()) {
-            if (isRPlus()) {
+            if (isRPlus() && !isExternalStorageManager()) {
                 directories_empty_placeholder.text = getString(R.string.no_items_found)
                 directories_empty_placeholder_2.beGone()
             } else {
@@ -1240,7 +1284,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
         dirs.filter { !it.areFavorites() && !it.isRecycleBin() }.forEach {
             if (!getDoesFilePathExist(it.path, OTGPath)) {
                 invalidDirs.add(it)
-            } else if (it.path != config.tempFolderPath && !isRPlus()) {
+            } else if (it.path != config.tempFolderPath && (!isRPlus() || isExternalStorageManager())) {
                 // avoid calling file.list() or listfiles() on Android 11+, it became way too slow
                 val children = if (isPathOnOTG(it.path)) {
                     getOTGFolderChildrenNames(it.path)
@@ -1434,6 +1478,8 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             add(Release(277, R.string.release_277))
             add(Release(295, R.string.release_295))
             add(Release(327, R.string.release_327))
+            add(Release(359, R.string.faq_16_text))
+            add(Release(369, R.string.release_369))
             checkWhatsNew(this, BuildConfig.VERSION_CODE)
         }
     }

@@ -33,7 +33,8 @@
     <string name="set_as_default_folder">Imposta come cartella predefinita</string>
     <string name="unset_as_default_folder">Non impostare come cartella predefinita</string>
     <string name="reorder_by_dragging">Riordina cartelle trascinandole</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
+    <string name="reorder_by_dragging_pro">Riordina cartelle trascinandole (Pro)</string>
+    <string name="restore_to_path">Ripristino a «%s»</string>
     <!-- Filter -->
     <string name="filter_media">Filtra i file</string>
     <string name="images">Immagini</string>
@@ -57,6 +58,8 @@
     <string name="hidden_folders">Cartelle nascoste</string>
     <string name="manage_hidden_folders">Gestisci le cartelle nascoste</string>
     <string name="hidden_folders_placeholder">Non c\'è alcuna cartella nascosta con un file .nomedia.</string>
+    <string name="temporarily_show_excluded">Mostra temporaneamente esclusi</string>
+    <string name="stop_showing_excluded">Smetti di mostrare esclusi</string>
     <!-- Include folders -->
     <string name="include_folders">Includi cartelle</string>
     <string name="manage_included_folders">Gestisci le cartelle incluse</string>
@@ -112,6 +115,7 @@
     <string name="home_screen">Schermata principale</string>
     <string name="lock_screen">Schermata di blocco</string>
     <string name="home_and_lock_screen">Entrambe le schermate</string>
+    <string name="allow_changing_aspect_ratio">Consenti di modificare le proporzioni</string>
     <!-- Slideshow -->
     <string name="slideshow">Presentazione</string>
     <string name="interval">Intervallo (secondi):</string>
@@ -198,6 +202,10 @@
     <string name="square">Quadrato</string>
     <string name="rounded_corners">Angoli arrotondati</string>
     <string name="export_favorite_paths">Esporta i percorsi dei file preferiti</string>
+    <string name="media_management_prompt">Per assicurarsi che tutte le operazioni sui file funzionino in modo affidabile, si prega di rendere questa app un\'app di gestione dei media nelle impostazioni del dispositivo.</string>
+    <string name="password_protect_excluded">Proteggi con password la visibilità della cartella esclusa</string>
+    <string name="media_management_manual">Qualcosa è andato storto, si prega di andare nelle Impostazioni del vostro dispositivo - App - Accesso speciale per le app - App di gestione contenuti multimediali e consentire a questa app di gestire i media.</string>
+    <string name="media_management_note">Se il reindirizzamento non funziona, si prega di andare nel Impostazioni del dispositivo - Apps - Accesso speciale app - Applicazioni di gestione dei media e consentire a questa applicazione di gestire i media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Miniature</string>
     <string name="fullscreen_media">Media a schermo intero</string>
@@ -267,11 +275,11 @@
     <string name="pesdk_editor_text_exportProgressUnknown">Esportazione…</string>
     <string name="pesdk_editor_text_exportProgress" formatted="false">Esportazione %s.</string>
     <string name="pesdk_sticker_title_name">Adesivo</string>
-    <string name="pesdk_sticker_title_color">Colore Sticker</string>
-    <string name="pesdk_sticker_title_options">Opzioni Sticker Options</string>
+    <string name="pesdk_sticker_title_color">Colore dell\'adesivo</string>
+    <string name="pesdk_sticker_title_options">Opzioni degli adesivi</string>
     <string name="pesdk_sticker_button_add">Aggiungi</string>
     <string name="pesdk_sticker_button_color">Colore</string>
-    <string name="pesdk_sticker_button_delete">Cancella</string>
+    <string name="pesdk_sticker_button_delete">Elimina</string>
     <string name="pesdk_sticker_button_bringToFront">Sposta davanti</string>
     <string name="pesdk_sticker_button_straighten">Raddrizza</string>
     <string name="pesdk_sticker_button_replace">Sostituisci</string>
@@ -350,7 +358,7 @@
     <string name="faq_15_title">Perchè l\'app occupa così tanto spazio?</string>
     <string name="faq_15_text">La cache dell\'app può occupare massimo 250MB, serve per veloccizare il caricamento delle immagini. Se l\'app sta prendendo sempre più spazio, molto probabilmente è causato dagli elementi nel Cestino. Questi file contano nella dimensione dell\'app. Puoi svuotare il Cestino aprendolo ed eliminando tutti i file, oppure andando nelle impostazioni dell\'app. Ogni file nel Cestino viene eliminato automaticamente dopo 30 giorni.</string>
     <string name="faq_16_title">Cos\'è successo al nascondere file e cartelle e perché non posso più vedere gli elementi nascosti\?</string>
-    <string name="faq_16_text">A partire da Android 11 non è più possibile nascondere o togliere i file o le cartelle, non è possibile vedere quelli nascosti neanche nelle app della galleria. Dovrai usare qualche gestore file per questo.</string>
+    <string name="faq_16_text">A partire da Android 11 non è più possibile nascondere o mostrare i file o le cartelle nascoste, non è possibile vedere quelli nascosti neanche nelle app della galleria a causa di restrizioni di sistema. Dovrai usare qualche gestore file per questo.</string>
     <string name="faq_17_title">Perché non posso più includere le cartelle mancanti\?</string>
     <string name="faq_17_text">Ciò ha smesso di funzionare a causa delle modifiche al sistema fornite anche con Android 11, l\'app non può più sfogliare le cartelle reali, si basa sul cosiddetto MediaStore per recuperare i dati.</string>
     <string name="faq_18_title">Perché vedo delle pubblicità durante la riproduzione del video\?</string>

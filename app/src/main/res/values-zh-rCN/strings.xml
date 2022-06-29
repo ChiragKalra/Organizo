@@ -39,6 +39,7 @@
     <string name="set_as_default_folder">设置为默认文件夹</string>
     <string name="unset_as_default_folder">取消设置为默认文件夹</string>
     <string name="reorder_by_dragging">通过拖动重新排序文件夹</string>
+    <string name="reorder_by_dragging_pro">通过拖动重新排序文件夹 (Pro)</string>
     <string name="restore_to_path">还原到 \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">筛选媒体文件</string>
@@ -65,6 +66,8 @@
     <string name="hidden_folders">隐藏的文件夹</string>
     <string name="manage_hidden_folders">管理隐藏的文件夹</string>
     <string name="hidden_folders_placeholder">看起来您没有任何使用“.nomedia”文件隐藏的目录。</string>
+    <string name="temporarily_show_excluded">临时显示已排除的</string>
+    <string name="stop_showing_excluded">停止显示已排除的</string>
     <!-- Include folders -->
     <string name="include_folders">包含的文件夹</string>
     <string name="manage_included_folders">管理包含的文件夹</string>
@@ -120,6 +123,7 @@
     <string name="home_screen">主屏幕</string>
     <string name="lock_screen">锁定屏幕</string>
     <string name="home_and_lock_screen">主屏幕和锁定屏幕</string>
+    <string name="allow_changing_aspect_ratio">允许更改长宽比</string>
     <!-- Slideshow -->
     <string name="slideshow">幻灯片</string>
     <string name="interval">间隔（秒）:</string>
@@ -206,6 +210,10 @@
     <string name="square">方形</string>
     <string name="rounded_corners">圆角</string>
     <string name="export_favorite_paths">导出收藏文件路径</string>
+    <string name="media_management_prompt">为了确保所有文件操作可靠地工作，请在你的设备设置中使此应用成为媒体管理应用。</string>
+    <string name="password_protect_excluded">密码保护已排除文件夹的可见性</string>
+    <string name="media_management_manual">出错了，请转到设备的“设置” - “应用” -“特殊应用权限” - “媒体管理应用” 并允许本应用管理媒体文件。</string>
+    <string name="media_management_note">如果重定向无法正常工作，请转到设备的“设置” - “应用” - “特殊应用权限” - “媒体管理应用” 并允许此应用管理媒体文件。</string>
     <!-- Setting sections -->
     <string name="thumbnails">缩略图</string>
     <string name="fullscreen_media">全屏显示媒体</string>
@@ -358,7 +366,7 @@
     <string name="faq_15_title">为什么应用占用了这么多的空间？</string>
     <string name="faq_15_text">应用缓存最多可达250MB，这样可以使图像加载更快。如果应用占用了更多空间，则很可能是因为回收站中有项目。这些文件被计入应用程序大小。您可以打开回收站并删除所有文件，或从应用设置中清除回收站。回收站中的内容会在30天后自动删除。</string>
     <string name="faq_16_title">文件和文件夹隐藏发生了什么，为什么我再不能看到隐藏项目了？</string>
-    <string name="faq_16_text">从 Android 11 开始，你再也不能隐藏或取消隐藏文件或文件夹了，你也不能在图库应用中看到隐藏的文件或文件夹。你必须使用文件管理器来进行此类操作。</string>
+    <string name="faq_16_text">从 Android 11 开始，你再也不能隐藏或取消隐藏文件或文件夹，由于系统限制，也不能在图库应用中看到隐藏的文件或文件夹了。你必须使用文件管理器来进行此类操作。</string>
     <string name="faq_17_title">为什么我再不能包含缺失的文件夹？</string>
     <string name="faq_17_text">由于 Android 11 的系统变化，这一功能也停止了工作，本应用不能再浏览真实的文件夹了，它依赖于所谓的 MediaStore 来获取数据。</string>
     <string name="faq_18_title">为何我在视频播放期间看到广告？</string>

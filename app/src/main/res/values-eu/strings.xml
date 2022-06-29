@@ -33,6 +33,7 @@
     <string name="set_as_default_folder">Ezarri lehenetsitako karpeta gisa</string>
     <string name="unset_as_default_folder">Kendu karpeta lehenetsitako karpeta gisa</string>
     <string name="reorder_by_dragging">Berrordenatu karpetak arrastatuz</string>
+    <string name="reorder_by_dragging_pro">Berrordenatu karpetak arrastatuz (Pro)</string>
     <string name="restore_to_path">Restoring to \'%s\'</string>
 
     <!-- Filter -->
@@ -59,6 +60,8 @@
     <string name="hidden_folders">Ezkutatutako karpetak</string>
     <string name="manage_hidden_folders">Kudeatu ezkutatutako karpetak</string>
     <string name="hidden_folders_placeholder">Badirudi \".nomedia\" fitxategia duen ezkutatutako karpetarik ez duzula.</string>
+    <string name="temporarily_show_excluded">Temporarily show excluded</string>
+    <string name="stop_showing_excluded">Stop showing excluded</string>
 
     <!-- Include folders -->
     <string name="include_folders">Sartutako karpetak</string>
@@ -114,6 +117,7 @@
     <string name="home_screen">Hasierako pantaila</string>
     <string name="lock_screen">Blokeatutako pantaila</string>
     <string name="home_and_lock_screen">Hasierako eta blokeatutako pantaila</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
 
     <!-- Slideshow -->
     <string name="slideshow">Diaporama</string>
@@ -205,6 +209,10 @@
     <string name="square">Karratua</string>
     <string name="rounded_corners">Ertz biribilduak</string>
     <string name="export_favorite_paths">Esportatu gogoko fitxategi-bideak</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Password protect excluded folder visibility</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
 
     <!-- Setting sections -->
     <string name="thumbnails">Iruditxoak</string>

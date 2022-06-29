@@ -12,9 +12,11 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import android.provider.MediaStore.Files
 import android.provider.MediaStore.Images
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +26,9 @@ import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.simplemobiletools.commons.activities.BaseSimpleActivity
+import com.simplemobiletools.commons.dialogs.ConfirmationAdvancedDialog
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
+import com.simplemobiletools.commons.dialogs.SecurityDialog
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.commons.models.FAQItem
@@ -105,14 +109,17 @@ fun SimpleActivity.launchAbout() {
         FAQItem(R.string.faq_15_title, R.string.faq_15_text),
         FAQItem(R.string.faq_2_title, R.string.faq_2_text),
         FAQItem(R.string.faq_18_title, R.string.faq_18_text),
-        FAQItem(R.string.faq_2_title_commons, R.string.faq_2_text_commons),
-        FAQItem(R.string.faq_6_title_commons, R.string.faq_6_text_commons),
-        FAQItem(R.string.faq_7_title_commons, R.string.faq_7_text_commons),
         FAQItem(R.string.faq_9_title_commons, R.string.faq_9_text_commons),
-        FAQItem(R.string.faq_10_title_commons, R.string.faq_10_text_commons)
     )
 
-    if (isRPlus()) {
+    if (!resources.getBoolean(R.bool.hide_google_relations)) {
+        faqItems.add(FAQItem(R.string.faq_2_title_commons, R.string.faq_2_text_commons))
+        faqItems.add(FAQItem(R.string.faq_6_title_commons, R.string.faq_6_text_commons))
+        faqItems.add(FAQItem(R.string.faq_7_title_commons, R.string.faq_7_text_commons))
+        faqItems.add(FAQItem(R.string.faq_10_title_commons, R.string.faq_10_text_commons))
+    }
+
+    if (isRPlus() && !isExternalStorageManager()) {
         faqItems.add(0, FAQItem(R.string.faq_16_title, R.string.faq_16_text))
         faqItems.add(1, FAQItem(R.string.faq_17_title, R.string.faq_17_text))
         faqItems.removeIf { it.text == R.string.faq_7_text }
@@ -121,6 +128,44 @@ fun SimpleActivity.launchAbout() {
     }
 
     startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
+}
+
+fun BaseSimpleActivity.handleMediaManagementPrompt(callback: () -> Unit) {
+    if (canManageMedia() || isExternalStorageManager()) {
+        callback()
+    } else if (isRPlus() && resources.getBoolean(R.bool.require_all_files_access)) {
+        if (Environment.isExternalStorageManager()) {
+            callback()
+        } else {
+            ConfirmationAdvancedDialog(this, "", R.string.access_storage_prompt, R.string.ok, 0) { success ->
+                if (success) {
+                    try {
+                        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                        intent.addCategory("android.intent.category.DEFAULT")
+                        intent.data = Uri.parse("package:$packageName")
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        val intent = Intent()
+                        intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION
+                        try {
+                            startActivity(intent)
+                        } catch (e: Exception) {
+                            showErrorToast(e)
+                        }
+                    }
+                } else {
+                    finish()
+                }
+            }
+        }
+    } else if (isSPlus() && !MediaStore.canManageMedia(this) && !isExternalStorageManager()) {
+        val message = "${getString(R.string.media_management_prompt)}\n\n${getString(R.string.media_management_note)}"
+        ConfirmationDialog(this, message, 0, R.string.ok, 0) {
+            launchMediaManagementIntent(callback)
+        }
+    } else {
+        callback()
+    }
 }
 
 fun AppCompatActivity.showSystemUI(toggleActionBarVisibility: Boolean) {
@@ -246,7 +291,7 @@ fun BaseSimpleActivity.tryCopyMoveFilesTo(fileDirItems: ArrayList<FileDirItem>, 
     }
 
     val source = fileDirItems[0].getParentPath()
-    PickDirectoryDialog(this, source, true, false) {
+    PickDirectoryDialog(this, source, true, false, true, false) {
         val destination = it
         handleSAFDialog(source) {
             if (it) {
@@ -320,7 +365,7 @@ fun BaseSimpleActivity.movePathsInRecycleBin(paths: ArrayList<String>, callback:
                         mediaDB.updateDeleted("$RECYCLE_BIN$source", System.currentTimeMillis(), source)
                         pathsCnt--
 
-                        if (config.keepLastModified) {
+                        if (config.keepLastModified && lastModified != 0L) {
                             internalFile.setLastModified(lastModified)
                         }
                     }
@@ -346,10 +391,8 @@ fun BaseSimpleActivity.restoreRecycleBinPaths(paths: ArrayList<String>, callback
             var destination = source.removePrefix(recycleBinPath)
 
             val destinationParent = destination.getParentPath()
-            val isAStorageRootFolder = isAStorageRootFolder(destinationParent)
-            if (isRPlus() && isAStorageRootFolder) {
-                // if the file is on the root of Internal Storage or SD Card, change it to Pictures
-                // we cannot write there on 30+
+            if (isRestrictedWithSAFSdk30(destinationParent) && !isInDownloadDir(destinationParent)) {
+                // if the file is not writeable on SDK30+, change it to Pictures
                 val picturesDirectory = getPicturesDirectoryPath(destination)
                 destination = File(picturesDirectory, destination.getFilenameFromPath()).path
                 if (!shownRestoringToPictures) {
@@ -397,7 +440,7 @@ fun BaseSimpleActivity.restoreRecycleBinPaths(paths: ArrayList<String>, callback
                 }
                 newPaths.add(destination)
 
-                if (config.keepLastModified) {
+                if (config.keepLastModified && lastModified != 0L) {
                     File(destination).setLastModified(lastModified)
                 }
             } catch (e: Exception) {
@@ -654,7 +697,7 @@ fun Activity.tryRotateByExif(path: String, degrees: Int, showToasts: Boolean, ca
 }
 
 fun Activity.fileRotatedSuccessfully(path: String, lastModified: Long) {
-    if (config.keepLastModified) {
+    if (config.keepLastModified && lastModified != 0L) {
         File(path).setLastModified(lastModified)
         updateLastModified(path, lastModified)
     }
@@ -735,5 +778,17 @@ fun Activity.showFileOnMap(path: String) {
         showLocationOnMap("${latLon[0]}, ${latLon[1]}")
     } else {
         toast(R.string.unknown_location)
+    }
+}
+
+fun Activity.handleExcludedFolderPasswordProtection(callback: () -> Unit) {
+    if (config.isExcludedPasswordProtectionOn) {
+        SecurityDialog(this, config.excludedPasswordHash, config.excludedProtectionType) { _, _, success ->
+            if (success) {
+                callback()
+            }
+        }
+    } else {
+        callback()
     }
 }

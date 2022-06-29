@@ -16,8 +16,8 @@ android {
         applicationId "com.simplemobiletools.gallery.pro"
         minSdk 21
         targetSdk 31
-        versionCode 358
-        versionName "6.22.3"
+        versionCode 371
+        versionName "6.23.12"
         setProperty("archivesBaseName", "gallery-$versionCode")
         vectorDrawables.useSupportLibrary = true
     }
@@ -59,6 +59,7 @@ android {
     productFlavors {
         proprietary {}
         foss {}
+        prepaid {}
     }
 
     lintOptions {
@@ -77,11 +78,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.SimpleMobileTools:Simple-Commons:6fe11460ea'
+    implementation 'com.github.SimpleMobileTools:Simple-Commons:dea77e0130'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'it.sephiroth.android.exif:library:1.0.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.exoplayer:exoplayer-core:2.9.6'
     implementation 'com.google.vr:sdk-panowidget:1.180.0'
     implementation 'com.google.vr:sdk-videowidget:1.180.0'
@@ -89,7 +90,7 @@ dependencies {
     implementation 'info.androidhive:imagefilters:1.0.7'
     implementation 'com.caverock:androidsvg-aar:1.4'
     implementation 'com.github.tibbi:gestureviews:a8e8fa8d27'
-    implementation 'com.github.tibbi:subsampling-scale-image-view:65ff7870ed'
+    implementation 'com.github.tibbi:subsampling-scale-image-view:b51482b3fa'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.github.penfeizhou.android.animation:awebp:2.17.0'
     implementation 'com.github.penfeizhou.android.animation:apng:2.17.0'
@@ -99,11 +100,13 @@ dependencies {
     }
     compileOnly 'com.squareup.okhttp3:okhttp:4.9.0'
 
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
-    kapt 'androidx.room:room-compiler:2.3.0'
-    implementation 'androidx.room:room-runtime:2.3.0'
-    annotationProcessor 'androidx.room:room-compiler:2.3.0'
+    kapt 'androidx.room:room-compiler:2.4.2'
+    implementation 'androidx.room:room-runtime:2.4.2'
+    annotationProcessor 'androidx.room:room-compiler:2.4.2'
+
+    //implementation project(':commons')
 }
 
 // Apply the PESDKPlugin

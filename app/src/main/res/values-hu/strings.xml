@@ -39,6 +39,7 @@
     <string name="set_as_default_folder">Beállítás alapértelmezett mappaként</string>
     <string name="unset_as_default_folder">Eltávolítás mint alapértelmezett mappa</string>
     <string name="reorder_by_dragging">Mappák átrendezése húzással</string>
+    <string name="reorder_by_dragging_pro">Mappák átrendezése húzással (Pro)</string>
     <string name="restore_to_path">Restoring to \'%s\'</string>
 
     <!-- Filter -->
@@ -64,6 +65,8 @@
     <string name="hidden_folders">Rejtett mappák</string>
     <string name="manage_hidden_folders">Rejtett mappák kezelése</string>
     <string name="hidden_folders_placeholder">Úgy tűnik, nincsenek „.nomedia” fájllal elrejtett mappái.</string>
+    <string name="temporarily_show_excluded">Temporarily show excluded</string>
+    <string name="stop_showing_excluded">Stop showing excluded</string>
     <!-- Include folders -->
     <string name="include_folders">Belevett mappák</string>
     <string name="manage_included_folders">Belevett mappák kezelése</string>
@@ -119,6 +122,7 @@
     <string name="home_screen">Kezdőképernyő</string>
     <string name="lock_screen">Zárolási képernyő</string>
     <string name="home_and_lock_screen">Kezdő- és zárolási képernyő</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">Diavetítés</string>
     <string name="interval">Időköz (másodperc):</string>
@@ -205,6 +209,10 @@
     <string name="square">Négyzet</string>
     <string name="rounded_corners">Lekerekített sarkok</string>
     <string name="export_favorite_paths">Kedvenc fájlútvonalak exportálása</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Password protect excluded folder visibility</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Bélyegképek</string>
     <string name="fullscreen_media">Teljes képernyős média</string>

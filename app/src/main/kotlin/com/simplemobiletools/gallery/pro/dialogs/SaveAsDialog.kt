@@ -82,9 +82,9 @@ class SaveAsDialog(
                                 val newFile = File(newPath)
                                 val isInDownloadDir = activity.isInDownloadDir(newPath)
                                 val isInSubFolderInDownloadDir = activity.isInSubFolderInDownloadDir(newPath)
-                                if (isRPlus() && isInDownloadDir && !isInSubFolderInDownloadDir && !newFile.canWrite()) {
+                                if ((isRPlus() && !isExternalStorageManager()) && isInDownloadDir && !isInSubFolderInDownloadDir && !newFile.canWrite()) {
                                     val fileDirItem = arrayListOf(File(newPath).toFileDirItem(activity))
-                                    val fileUris = activity.getFileUrisFromFileDirItems(fileDirItem).second
+                                    val fileUris = activity.getFileUrisFromFileDirItems(fileDirItem)
                                     activity.updateSDK30Uris(fileUris) { success ->
                                         if (success) {
                                             selectPath(this, newPath)

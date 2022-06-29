@@ -33,6 +33,7 @@
     <string name="set_as_default_folder">設為預設資料夾</string>
     <string name="unset_as_default_folder">取消設為預設資料夾</string>
     <string name="reorder_by_dragging">透過拖曳來重新排序資料夾</string>
+    <string name="reorder_by_dragging_pro">透過拖曳來重新排序資料夾 (Pro)</string>
     <string name="restore_to_path">Restoring to \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">篩選媒體檔案</string>
@@ -57,6 +58,8 @@
     <string name="hidden_folders">隱藏資料夾</string>
     <string name="manage_hidden_folders">管理隱藏資料夾</string>
     <string name="hidden_folders_placeholder">看來沒有以「.nomedia」檔案來隱藏的資料夾。</string>
+    <string name="temporarily_show_excluded">Temporarily show excluded</string>
+    <string name="stop_showing_excluded">Stop showing excluded</string>
     <!-- Include folders -->
     <string name="include_folders">包含資料夾</string>
     <string name="manage_included_folders">管理包含資料夾</string>
@@ -110,6 +113,7 @@
     <string name="home_screen">主畫面</string>
     <string name="lock_screen">鎖定畫面</string>
     <string name="home_and_lock_screen">主畫面及鎖定畫面</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">投影片</string>
     <string name="interval">間隔 (秒):</string>
@@ -196,6 +200,10 @@
     <string name="square">方形</string>
     <string name="rounded_corners">圓角</string>
     <string name="export_favorite_paths">Export favorite file paths</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Password protect excluded folder visibility</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">縮圖</string>
     <string name="fullscreen_media">全螢幕媒體檔案</string>

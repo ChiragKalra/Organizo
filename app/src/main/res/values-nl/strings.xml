@@ -35,6 +35,7 @@
     <string name="set_as_default_folder">Als standaardmap instellen</string>
     <string name="unset_as_default_folder">Standaardmap herstellen</string>
     <string name="reorder_by_dragging">Volgorde mappen bepalen met sleepgebaren</string>
+    <string name="reorder_by_dragging_pro">Volgorde mappen bepalen met sleepgebaren (Pro)</string>
     <string name="restore_to_path">Herstellen naar \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">Media filteren</string>
@@ -61,6 +62,8 @@
     <string name="hidden_folders">Verborgen mappen</string>
     <string name="manage_hidden_folders">Verborgen mappen beheren</string>
     <string name="hidden_folders_placeholder">Er zijn geen mappen gevonden die zijn verborgen door bestand \".nomedia\".</string>
+    <string name="temporarily_show_excluded">Uitgesloten mappen tijdelijk tonen</string>
+    <string name="stop_showing_excluded">Uitgesloten mappen verbergen</string>
     <!-- Include folders -->
     <string name="include_folders">Toegevoegde mappen</string>
     <string name="manage_included_folders">Toegevoegde mappen beheren</string>
@@ -116,6 +119,7 @@
     <string name="home_screen">Startscherm</string>
     <string name="lock_screen">Vergrendelscherm</string>
     <string name="home_and_lock_screen">Start- en vergrendelscherm</string>
+    <string name="allow_changing_aspect_ratio">Beeldverhouding mag worden gewijzigd</string>
     <!-- Slideshow -->
     <string name="slideshow">Diavoorstelling</string>
     <string name="interval">Interval (seconden):</string>
@@ -202,6 +206,10 @@
     <string name="square">Vierkant</string>
     <string name="rounded_corners">Afgeronde hoeken</string>
     <string name="export_favorite_paths">Locaties favorieten exporteren</string>
+    <string name="media_management_prompt">Maak van deze app in de systeeminstellingen een mediabeheer-app om er zeker van te zijn dat alle bestandsoperaties betrouwbaar werken.</string>
+    <string name="password_protect_excluded">Zichtbaarheid van uitgesloten mappen met wachtwoord beveiligen</string>
+    <string name="media_management_manual">Er is een fout opgetreden. Ga naar de systeeminstellingen - Apps - Geavanceerd - Speciale app-toegang - Mediabeheer en geef deze app toegang tot mediabestanden.</string>
+    <string name="media_management_note">Ga als de doorverwijzing niet werkt naar de systeeminstellingen - Apps - Geavanceerd - Speciale app-toegang - Mediabeheer en geef deze app toegang tot mediabestanden.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Miniaturen</string>
     <string name="fullscreen_media">Volledig scherm</string>
@@ -355,7 +363,7 @@
     <string name="faq_15_title">Waarom neemt de app zoveel ruimte in beslag?</string>
     <string name="faq_15_text">De cache voor de app kan oplopen tot 250MB; dit garandeert snellere laadtijden van afbeeldingen. Indien de app nog meer ruimte inneemt, komt dat hoogstwaarschijnlijk door de items in de prullenbak. Ook deze bestanden worden meegerekend met de ingenomen ruimte. Verwijder deze items zelf vanuit de prullenbak of vanuit de instellingen van de app. Ieder item in de prullenbak zal na 30 dagen automatisch verwijderd worden.</string>
     <string name="faq_16_title">Wat is er gebeurd met de functie om bestanden en mappen te verbergen\? Waarom kan ik geen verborgen items meer bekijken\?</string>
-    <string name="faq_16_text">Vanaf Android 11 kunnen bestanden en mappen niet meer verborgen (of weer getoond) worden via deze app. Verborgen items kunnen ook niet meer in galerij-apps worden weergegeven. Alleen bestandsbeheer-apps kunnen deze functionaliteit nog bieden.</string>
+    <string name="faq_16_text">Vanaf Android 11 kunnen bestanden en mappen niet meer verborgen (of weer getoond) worden via deze app. Wegens nieuwe restricties van Android kunnen verborgen items ook niet meer in galerij-apps worden weergegeven. Alleen bestandsbeheer-apps kunnen deze functionaliteit nog bieden.</string>
     <string name="faq_17_title">Waarom kan ik ontbrekende mappen niet meer handmatig toevoegen\?</string>
     <string name="faq_17_text">Dit werkt ook niet meer sinds de aanpassingen in Android 11: deze app mag niet meer door de mappen op het apparaat navigeren, maar is voortaan afhankelijk van de MediaStore van Android bij het ophalen van bestandsgegevens.</string>
     <string name="faq_18_title">Waarom zie ik advertenties bij het afspelen van video\'s\?</string>

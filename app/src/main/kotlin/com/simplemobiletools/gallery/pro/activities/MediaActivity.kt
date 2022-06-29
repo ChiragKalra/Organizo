@@ -57,6 +57,7 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
     private var mShowAll = false
     private var mLoadedInitialPhotos = false
     private var mIsSearchOpen = false
+    private var mWasFullscreenViewOpen = false
     private var mLastSearchedText = ""
     private var mLatestMediaId = 0L
     private var mLatestMediaDateId = 0L
@@ -166,12 +167,15 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
 
         media_empty_text_placeholder.setTextColor(getProperTextColor())
         media_empty_text_placeholder_2.setTextColor(getProperPrimaryColor())
+        media_empty_text_placeholder_2.bringToFront()
 
         if (!mIsSearchOpen) {
             invalidateOptionsMenu()
         }
 
-        if (mMedia.isEmpty() || config.getFolderSorting(mPath) and SORT_BY_RANDOM == 0) {
+        // do not refresh Random sorted files after opening a fullscreen image and going Back
+        val isRandomSorting = config.getFolderSorting(mPath) and SORT_BY_RANDOM != 0
+        if (mMedia.isEmpty() || !isRandomSorting || (isRandomSorting && !mWasFullscreenViewOpen)) {
             if (shouldSkipAuthentication()) {
                 tryLoadGallery()
             } else {
@@ -240,8 +244,8 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             findItem(R.id.about).isVisible = mShowAll
             findItem(R.id.create_new_folder).isVisible = !mShowAll && mPath != RECYCLE_BIN && mPath != FAVORITES
 
-            findItem(R.id.temporarily_show_hidden).isVisible = !isRPlus() && !config.shouldShowHidden
-            findItem(R.id.stop_showing_hidden).isVisible = !isRPlus() && config.temporarilyShowHidden
+            findItem(R.id.temporarily_show_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && !config.shouldShowHidden
+            findItem(R.id.stop_showing_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && config.temporarilyShowHidden
 
             findItem(R.id.set_as_default_folder).isVisible = !isDefaultFolder
             findItem(R.id.unset_as_default_folder).isVisible = isDefaultFolder
@@ -804,6 +808,7 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
             }
             finish()
         } else {
+            mWasFullscreenViewOpen = true
             val isVideo = path.isVideoFast()
             if (isVideo) {
                 val extras = HashMap<String, Boolean>()

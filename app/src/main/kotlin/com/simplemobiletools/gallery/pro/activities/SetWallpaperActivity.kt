@@ -20,8 +20,12 @@ import kotlinx.android.synthetic.main.activity_set_wallpaper.*
 import kotlinx.android.synthetic.main.bottom_set_wallpaper_actions.*
 
 class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageCompleteListener {
+    private val RATIO_PORTRAIT = 0
+    private val RATIO_LANDSCAPE = 1
+    private val RATIO_SQUARE = 2
+
     private val PICK_IMAGE = 1
-    private var isLandscapeRatio = true
+    private var aspectRatio = RATIO_PORTRAIT
     private var wallpaperFlag = -1
 
     lateinit var uri: Uri
@@ -30,6 +34,7 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_wallpaper)
+        setupBottomActions()
 
         if (checkAppSideloading()) {
             return
@@ -44,7 +49,6 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
         }
 
         handleImage(intent)
-        setupBottomActions()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,6 +60,7 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save -> confirmWallpaper()
+            R.id.allow_changing_aspect_ratio -> crop_image_view.clearAspectRatio()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
@@ -80,7 +85,7 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
 
     private fun setupBottomActions() {
         bottom_set_wallpaper_aspect_ratio.setOnClickListener {
-            changeAspectRatio(!isLandscapeRatio)
+            changeAspectRatio()
         }
 
         bottom_set_wallpaper_rotate.setOnClickListener {
@@ -89,13 +94,21 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
     }
 
     private fun setupAspectRatio() {
-        val wallpaperWidth = if (isLandscapeRatio) wallpaperManager.desiredMinimumWidth else wallpaperManager.desiredMinimumWidth / 2
-        crop_image_view.setAspectRatio(wallpaperWidth, wallpaperManager.desiredMinimumHeight)
-        bottom_set_wallpaper_aspect_ratio.setImageResource(if (isLandscapeRatio) R.drawable.ic_minimize_vector else R.drawable.ic_maximize_vector)
+        var widthToUse = wallpaperManager.desiredMinimumWidth
+        val heightToUse = wallpaperManager.desiredMinimumHeight
+        if (widthToUse == heightToUse) {
+            widthToUse /= 2
+        }
+
+        when (aspectRatio) {
+            RATIO_PORTRAIT -> crop_image_view.setAspectRatio(heightToUse, widthToUse)
+            RATIO_LANDSCAPE -> crop_image_view.setAspectRatio(widthToUse, heightToUse)
+            else -> crop_image_view.setAspectRatio(widthToUse, widthToUse)
+        }
     }
 
-    private fun changeAspectRatio(isLandscape: Boolean) {
-        isLandscapeRatio = isLandscape
+    private fun changeAspectRatio() {
+        aspectRatio = ++aspectRatio % (RATIO_SQUARE + 1)
         setupAspectRatio()
     }
 

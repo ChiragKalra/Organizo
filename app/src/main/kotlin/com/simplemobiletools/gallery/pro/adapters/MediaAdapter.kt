@@ -161,7 +161,7 @@ class MediaAdapter(
         when (id) {
             R.id.cab_confirm_selection -> confirmSelection()
             R.id.cab_properties -> showProperties()
-            R.id.cab_rename -> renameFile()
+            R.id.cab_rename -> checkMediaManagementAndRename()
             R.id.cab_edit -> editFile()
             R.id.cab_hide -> toggleFileVisibility(true)
             R.id.cab_unhide -> toggleFileVisibility(false)
@@ -172,7 +172,7 @@ class MediaAdapter(
             R.id.cab_rotate_right -> rotateSelection(90)
             R.id.cab_rotate_left -> rotateSelection(270)
             R.id.cab_rotate_one_eighty -> rotateSelection(180)
-            R.id.cab_copy_to -> copyMoveTo(true)
+            R.id.cab_copy_to -> checkMediaManagementAndCopy(true)
             R.id.cab_move_to -> moveFilesTo()
             R.id.cab_create_shortcut -> createShortcut()
             R.id.cab_select_all -> selectAll()
@@ -211,8 +211,8 @@ class MediaAdapter(
 
     private fun checkHideBtnVisibility(menu: Menu, selectedItems: ArrayList<Medium>) {
         val isInRecycleBin = selectedItems.firstOrNull()?.getIsInRecycleBin() == true
-        menu.findItem(R.id.cab_hide).isVisible = !isRPlus() && !isInRecycleBin && selectedItems.any { !it.isHidden() }
-        menu.findItem(R.id.cab_unhide).isVisible = !isRPlus() && !isInRecycleBin && selectedItems.any { it.isHidden() }
+        menu.findItem(R.id.cab_hide).isVisible = (!isRPlus() || isExternalStorageManager()) && !isInRecycleBin && selectedItems.any { !it.isHidden() }
+        menu.findItem(R.id.cab_unhide).isVisible = (!isRPlus() || isExternalStorageManager()) && !isInRecycleBin && selectedItems.any { it.isHidden() }
     }
 
     private fun checkFavoriteBtnVisibility(menu: Menu, selectedItems: ArrayList<Medium>) {
@@ -231,6 +231,12 @@ class MediaAdapter(
         } else {
             val paths = getSelectedPaths()
             PropertiesDialog(activity, paths, config.shouldShowHidden)
+        }
+    }
+
+    private fun checkMediaManagementAndRename() {
+        activity.handleMediaManagementPrompt {
+            renameFile()
         }
     }
 
@@ -356,7 +362,13 @@ class MediaAdapter(
 
     private fun moveFilesTo() {
         activity.handleDeletePasswordProtection {
-            copyMoveTo(false)
+            checkMediaManagementAndCopy(false)
+        }
+    }
+
+    private fun checkMediaManagementAndCopy(isCopyOperation: Boolean) {
+        activity.handleMediaManagementPrompt {
+            copyMoveTo(isCopyOperation)
         }
     }
 
@@ -434,29 +446,42 @@ class MediaAdapter(
     }
 
     private fun checkDeleteConfirmation() {
-        if (config.isDeletePasswordProtectionOn) {
-            activity.handleDeletePasswordProtection {
+        activity.handleMediaManagementPrompt {
+            if (config.isDeletePasswordProtectionOn) {
+                activity.handleDeletePasswordProtection {
+                    deleteFiles()
+                }
+            } else if (config.tempSkipDeleteConfirmation || config.skipDeleteConfirmation) {
                 deleteFiles()
+            } else {
+                askConfirmDelete()
             }
-        } else if (config.tempSkipDeleteConfirmation || config.skipDeleteConfirmation) {
-            deleteFiles()
-        } else {
-            askConfirmDelete()
         }
     }
 
     private fun askConfirmDelete() {
         val itemsCnt = selectedKeys.size
-        val firstPath = getSelectedPaths().first()
-        val items = if (itemsCnt == 1) {
-            "\"${firstPath.getFilenameFromPath()}\""
+        val selectedMedia = getSelectedItems()
+        val firstPath = selectedMedia.first().path
+        val fileDirItem = selectedMedia.first().toFileDirItem()
+        val size = fileDirItem.getProperSize(activity, countHidden = true).formatSize()
+        val itemsAndSize = if (itemsCnt == 1) {
+            fileDirItem.mediaStoreId = selectedMedia.first().mediaStoreId
+            "\"${firstPath.getFilenameFromPath()}\" ($size)"
         } else {
-            resources.getQuantityString(R.plurals.delete_items, itemsCnt, itemsCnt)
+            val fileDirItems = ArrayList<FileDirItem>(selectedMedia.size)
+            selectedMedia.forEach { medium ->
+                val curFileDirItem = medium.toFileDirItem()
+                fileDirItems.add(curFileDirItem)
+            }
+            val fileSize = fileDirItems.sumByLong { it.getProperSize(activity, countHidden = true) }.formatSize()
+            val deleteItemsString = resources.getQuantityString(R.plurals.delete_items, itemsCnt, itemsCnt)
+            "$deleteItemsString ($fileSize)"
         }
 
         val isRecycleBin = firstPath.startsWith(activity.recycleBinPath)
         val baseString = if (config.useRecycleBin && !isRecycleBin) R.string.move_to_recycle_bin_confirmation else R.string.deletion_confirmation
-        val question = String.format(resources.getString(baseString), items)
+        val question = String.format(resources.getString(baseString), itemsAndSize)
         DeleteWithRememberDialog(activity, question) {
             config.tempSkipDeleteConfirmation = it
             deleteFiles()
@@ -476,19 +501,19 @@ class MediaAdapter(
                 return@handleSAFDialog
             }
 
-            val sdk30SafPath = selectedPaths.firstOrNull { activity.isAccessibleWithSAFSdk30(it) } ?: getFirstSelectedItemPath() ?: return@handleSAFDialog
-            activity.handleSAFDialogSdk30(sdk30SafPath) {
+            val sdk30SAFPath = selectedPaths.firstOrNull { activity.isAccessibleWithSAFSdk30(it) } ?: getFirstSelectedItemPath() ?: return@handleSAFDialog
+            activity.checkManageMediaOrHandleSAFDialogSdk30(sdk30SAFPath) {
                 if (!it) {
-                    return@handleSAFDialogSdk30
+                    return@checkManageMediaOrHandleSAFDialogSdk30
                 }
 
                 val fileDirItems = ArrayList<FileDirItem>(selectedKeys.size)
                 val removeMedia = ArrayList<Medium>(selectedKeys.size)
                 val positions = getSelectedItemPositions()
 
-                selectedItems.forEach {
-                    fileDirItems.add(FileDirItem(it.path, it.name))
-                    removeMedia.add(it)
+                selectedItems.forEach { medium ->
+                    fileDirItems.add(medium.toFileDirItem())
+                    removeMedia.add(medium)
                 }
 
                 media.removeAll(removeMedia)

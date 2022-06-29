@@ -33,6 +33,7 @@
     <string name="set_as_default_folder">Set as default folder</string>
     <string name="unset_as_default_folder">Unset as default folder</string>
     <string name="reorder_by_dragging">Reorder folders by dragging</string>
+    <string name="reorder_by_dragging_pro">Reorder folders by dragging (Pro)</string>
     <string name="restore_to_path">Restoring to \'%s\'</string>
 
     <!-- Filter -->
@@ -59,6 +60,8 @@
     <string name="hidden_folders">Hidden folders</string>
     <string name="manage_hidden_folders">Manage hidden folders</string>
     <string name="hidden_folders_placeholder">Seems like you don\'t have any folders hidden with a \".nomedia\" file.</string>
+    <string name="temporarily_show_excluded">Temporarily show excluded</string>
+    <string name="stop_showing_excluded">Stop showing excluded</string>
 
     <!-- Include folders -->
     <string name="include_folders">Included folders</string>
@@ -114,6 +117,7 @@
     <string name="home_screen">Home screen</string>
     <string name="lock_screen">Lock screen</string>
     <string name="home_and_lock_screen">Home and lock screen</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
 
     <!-- Slideshow -->
     <string name="slideshow">Slideshow</string>
@@ -205,6 +209,10 @@
     <string name="square">Square</string>
     <string name="rounded_corners">Rounded corners</string>
     <string name="export_favorite_paths">Export favorite file paths</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Password protect excluded folder visibility</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
 
     <!-- Setting sections -->
     <string name="thumbnails">Thumbnails</string>
@@ -363,7 +371,7 @@
     <string name="faq_15_title">Why does the app take up so much space?</string>
     <string name="faq_15_text">App cache can take up to 250MB, it ensures quicker image loading. If the app is taking up even more space, it is most likely caused by you having items in the Recycle Bin. Those files count to the app size. You can clear the Recycle bin by opening it and deleting all files, or from the app settings. Every file in the Bin is deleted automatically after 30 days.</string>
     <string name="faq_16_title">What happened to file and folder hiding and why cannot I see hidden items anymore?</string>
-    <string name="faq_16_text">Starting with Android 11 you cannot hide or unhide files or folders anymore, you cannot see the hidden ones in gallery apps either. You will have to use some file manager for that.</string>
+    <string name="faq_16_text">Starting with Android 11 you cannot hide or unhide files or folders anymore, you cannot see the hidden ones in gallery apps due to system restrictions either. You will have to use some file manager for that.</string>
     <string name="faq_17_title">Why cannot I include missing folders anymore?</string>
     <string name="faq_17_text">That stopped working due to the system changes that came with Android 11 too, the app cannot browse real folders anymore, it relies on the so called MediaStore at fetching data.</string>
     <string name="faq_18_title">Why do I see ads during video playback?</string>
