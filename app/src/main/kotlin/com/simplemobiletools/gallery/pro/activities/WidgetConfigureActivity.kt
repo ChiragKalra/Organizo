@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.RelativeLayout
 import android.widget.RemoteViews
 import com.bumptech.glide.signature.ObjectKey
 import com.simplemobiletools.commons.dialogs.ColorPickerDialog
@@ -48,15 +47,18 @@ class WidgetConfigureActivity : SimpleActivity() {
         config_text_color.setOnClickListener { pickTextColor() }
         folder_picker_value.setOnClickListener { changeSelectedFolder() }
         config_image_holder.setOnClickListener { changeSelectedFolder() }
+
+        updateTextColors(folder_picker_holder)
+        val primaryColor = getProperPrimaryColor()
+        config_bg_seekbar.setColors(mTextColor, primaryColor, primaryColor)
+        folder_picker_holder.background = ColorDrawable(getProperBackgroundColor())
+
         folder_picker_show_folder_name.isChecked = config.showWidgetFolderName
         handleFolderNameDisplay()
         folder_picker_show_folder_name_holder.setOnClickListener {
             folder_picker_show_folder_name.toggle()
             handleFolderNameDisplay()
         }
-
-        updateTextColors(folder_picker_holder)
-        folder_picker_holder.background = ColorDrawable(getProperBackgroundColor())
 
         getCachedDirectories(false, false) {
             mDirectories = it
@@ -122,15 +124,13 @@ class WidgetConfigureActivity : SimpleActivity() {
 
     private fun updateBackgroundColor() {
         mBgColor = mBgColorWithoutTransparency.adjustAlpha(mBgAlpha)
-        config_save.setBackgroundColor(mBgColor)
-        config_image_holder.setBackgroundColor(mBgColor)
-        config_bg_color.setFillWithStroke(mBgColor, Color.BLACK)
+        config_image_holder.background.applyColorFilter(mBgColor)
+        config_bg_color.setFillWithStroke(mBgColor, mBgColor)
     }
 
     private fun updateTextColor() {
-        config_save.setTextColor(mTextColor)
         config_folder_name.setTextColor(mTextColor)
-        config_text_color.setFillWithStroke(mTextColor, Color.BLACK)
+        config_text_color.setFillWithStroke(mTextColor, mTextColor)
     }
 
     private fun pickBackgroundColor() {
@@ -152,7 +152,7 @@ class WidgetConfigureActivity : SimpleActivity() {
     }
 
     private fun changeSelectedFolder() {
-        PickDirectoryDialog(this, "", false, true) {
+        PickDirectoryDialog(this, "", false, true, false, true) {
             updateFolderImage(it)
         }
     }
@@ -178,7 +178,5 @@ class WidgetConfigureActivity : SimpleActivity() {
     private fun handleFolderNameDisplay() {
         val showFolderName = folder_picker_show_folder_name.isChecked
         config_folder_name.beVisibleIf(showFolderName)
-        (config_image.layoutParams as RelativeLayout.LayoutParams).bottomMargin =
-            if (showFolderName) 0 else resources.getDimension(R.dimen.normal_margin).toInt()
     }
 }

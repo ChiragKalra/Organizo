@@ -14,7 +14,7 @@
     <string name="folder_view">Ansicht: Als Ordner</string>
     <string name="other_folder">Ordner wählen</string>
     <string name="show_on_map">Auf Karte zeigen</string>
-    <string name="unknown_location">Unbekannter Pfad</string>
+    <string name="unknown_location">Adresse nicht bekannt</string>
     <string name="volume">Lautstärke</string>
     <string name="brightness">Helligkeit</string>
     <string name="lock_orientation">Bildausrichtung sperren</string>
@@ -24,7 +24,7 @@
     <string name="force_landscape">Bildausrichtung im Querformat</string>
     <string name="use_default_orientation">Automatische Bildausrichtung</string>
     <string name="fix_date_taken">Aufnahmedatum korrigieren</string>
-    <string name="fixing">Korrigiere…</string>
+    <string name="fixing">Korrigiere …</string>
     <string name="dates_fixed_successfully">Datum erfolgreich korrigiert</string>
     <string name="no_date_takens_found">Es wurden keine Werte für das Aufnahmedatum gefunden</string>
     <string name="share_resized">Teile eine verkleinerte Version</string>
@@ -39,7 +39,8 @@
     <string name="set_as_default_folder">Als Standardordner festlegen</string>
     <string name="unset_as_default_folder">Nicht mehr als Standardordner festlegen</string>
     <string name="reorder_by_dragging">Neuordnung von Ordnern durch Ziehen</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
+    <string name="reorder_by_dragging_pro">Neuordnung von Ordnern durch Ziehen (Pro)</string>
+    <string name="restore_to_path">Wiederherstellung nach „%s“</string>
     <!-- Filter -->
     <string name="filter_media">Medien filtern</string>
     <string name="images">Bilder</string>
@@ -56,13 +57,17 @@
     <string name="excluded_folders">Ausgeschlossene Ordner</string>
     <string name="manage_excluded_folders">Ausgeschlossene Ordner verwalten</string>
     <string name="exclude_folder_description">Diese Funktion blendet die ausgewählten Ordner und deren Unterordner nur in dieser App aus. Ausgeschlossene Ordner können in den Einstellungen verwaltet werden.</string>
-    <string name="exclude_folder_parent">Möchtest du stattdessen einen höherliegenden Ordner ausschließen?</string>
-    <string name="excluded_activity_placeholder">\'Ordner ausschließen\' wird ausgewählte Ordner und deren Unterordner nur in dieser App ausblenden. Andere Apps werden solche Ordner weiterhin anzeigen.\n\nWenn du Ordner auch für andere Apps verstecken willst, verwende dafür die Funktion \'Ordner verstecken\'.</string>
+    <string name="exclude_folder_parent">Stattdessen einen Elternteil ausschließen\?</string>
+    <string name="excluded_activity_placeholder">„Ordner ausschließen“ wird ausgewählte Ordner und deren Unterordner nur in dieser App ausblenden. Andere Apps werden solche Ordner weiterhin anzeigen.
+\n
+\nWenn du Ordner auch für andere Apps verstecken willst, verwende dafür die Funktion „Ordner verstecken“.</string>
     <string name="remove_all">Alle entfernen</string>
     <string name="remove_all_description">Alle Ordner aus der Liste ausgeblendeter Ordner entfernen? Die Ordner selbst werden nicht gelöscht.</string>
     <string name="hidden_folders">Versteckte Ordner</string>
     <string name="manage_hidden_folders">Versteckte Ordner verwalten</string>
     <string name="hidden_folders_placeholder">Keinen mit einer .nomedia-Datei versteckten Ordner gefunden.</string>
+    <string name="temporarily_show_excluded">Ausgeschlossenes kurzfristig anzeigen</string>
+    <string name="stop_showing_excluded">Ausgeschlossene nicht mehr anzeigen</string>
     <!-- Include folders -->
     <string name="include_folders">Einbezogene Ordner</string>
     <string name="manage_included_folders">Einbezogene Ordner verwalten</string>
@@ -118,6 +123,7 @@
     <string name="home_screen">Startbildschirm</string>
     <string name="lock_screen">Sperrbildschirm</string>
     <string name="home_and_lock_screen">Start- und Sperrbildschirm</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">Diashow</string>
     <string name="interval">Intervall (Sekunden):</string>
@@ -204,6 +210,10 @@
     <string name="square">Quadrat</string>
     <string name="rounded_corners">Abgerundete Ecken</string>
     <string name="export_favorite_paths">Bevorzugte Dateipfade exportieren</string>
+    <string name="media_management_prompt">Um sicherzustellen, dass alle Dateivorgänge zuverlässig funktionieren, sollten Sie diese App in den Einstellungen Ihres Geräts als Medienverwaltungs-App festlegen.</string>
+    <string name="password_protect_excluded">Passwortschutz für die Sichtbarkeit ausgeschlossener Ordner</string>
+    <string name="media_management_manual">Irgendetwas ist schief gelaufen. Bitte gehen Sie in Ihrem Gerät auf Einstellungen - Anwendungen - Spezieller Anwendungs-Zugriff - Medienverwaltungs-Anwendungs und erlauben Sie dieser Anwendung, Medien zu verwalten.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Vorschaubilder</string>
     <string name="fullscreen_media">Vollbild-Anzeige von Medien</string>
@@ -240,7 +250,7 @@
     <string name="pesdk_focus_button_linear">Linear</string>
     <string name="pesdk_focus_button_mirrored">Gespiegelt</string>
     <string name="pesdk_focus_button_gaussian">Gaußsch</string>
-    <string name="pesdk_text_title_input">Add text</string>
+    <string name="pesdk_text_title_input">Text hinzufügen</string>
     <string name="pesdk_text_title_name">Text</string>
     <string name="pesdk_text_title_options">Textoptionen</string>
     <string name="pesdk_text_title_textColor">Textfarbe</string>
@@ -250,7 +260,7 @@
     <string name="pesdk_text_button_straighten">Begradigen</string>
     <string name="pesdk_text_button_font">Schrift</string>
     <string name="pesdk_text_button_color">Farbe</string>
-    <string name="pesdk_text_button_backgroundColor">Hintergrund</string>
+    <string name="pesdk_text_button_backgroundColor">Hintergrundfarbe</string>
     <string name="pesdk_text_button_alignment">Ausrichtung</string>
     <string name="pesdk_text_button_bringToFront">Nach Vorne</string>
     <string name="pesdk_text_button_delete">Löschen</string>
@@ -259,7 +269,7 @@
     <string name="pesdk_brush_button_color">Farbe</string>
     <string name="pesdk_brush_button_size">Größe</string>
     <string name="pesdk_brush_button_hardness">Stärke</string>
-    <string name="pesdk_brush_button_bringToFront">Nach Vorne</string>
+    <string name="pesdk_brush_button_bringToFront">Nach vorne</string>
     <string name="pesdk_brush_button_delete">Löschen</string>
     <string name="pesdk_brush_title_brushColor">Pinselfarbe</string>
     <string name="pesdk_editor_title_name">Editor</string>
@@ -273,8 +283,8 @@
     <string name="pesdk_editor_text_exportProgressUnknown">Wird exportiert …</string>
     <string name="pesdk_editor_text_exportProgress" formatted="false">Wird exportiert %s.</string>
     <string name="pesdk_sticker_title_name">Aufkleber</string>
-    <string name="pesdk_sticker_title_color">Sticker Farbe</string>
-    <string name="pesdk_sticker_title_options">Sticker Optionen</string>
+    <string name="pesdk_sticker_title_color">Aufkleberfarbe</string>
+    <string name="pesdk_sticker_title_options">Aufkleber-Optionen</string>
     <string name="pesdk_sticker_button_add">Hinzufügen</string>
     <string name="pesdk_sticker_button_color">Farbe</string>
     <string name="pesdk_sticker_button_delete">Löschen</string>
@@ -291,7 +301,7 @@
     <string name="pesdk_overlay_button_blendModeDarken">Abdunkeln</string>
     <string name="pesdk_overlay_button_blendModeScreen">Screen</string>
     <string name="pesdk_overlay_button_blendModeOverlay">Überlagerung</string>
-    <string name="pesdk_overlay_button_blendModeLighten">Erhellen</string>
+    <string name="pesdk_overlay_button_blendModeLighten">Aufhellen</string>
     <string name="pesdk_overlay_button_blendModeMultiply">Multiplizieren</string>
     <string name="pesdk_overlay_button_blendModeColorBurn">Farbbrennen</string>
     <string name="pesdk_overlay_button_blendModeSoftLight">Weiches Licht</string>
@@ -320,12 +330,12 @@
     <string name="pesdk_common_title_redColor">Rot</string>
     <string name="pesdk_common_title_orangeColor">Orange</string>
     <string name="pesdk_common_title_goldColor">Gold</string>
-    <string name="pesdk_common_title_yellowColor">Geld</string>
+    <string name="pesdk_common_title_yellowColor">Gelb</string>
     <string name="pesdk_common_title_oliveColor">Olive</string>
     <string name="pesdk_common_title_greenColor">Grün</string>
     <string name="pesdk_common_title_aquamarinColor">Aquamarin</string>
     <string name="pesdk_common_title_pipettableColor">Pipettierbare Farbe</string>
-    <string name="vesdk_video_trim_title_name">Schneiden</string>
+    <string name="vesdk_video_trim_title_name">Zuschneiden</string>
     <!-- FAQ -->
     <string name="faq_1_title">Wie kann ich Schlichte Galerie als Standardanwendung auswählen?</string>
     <string name="faq_1_text">Zunächst musst du unter „Apps“ in den Geräteeinstellungen die aktuelle Standardgalerie finden. Suche nach einer Bedienfläche wie „Standardmäßig öffnen“, betätige diese und wähle „Standardeinstellungen löschen“. Das nächste Mal, wenn du ein Bild oder ein Video öffnest, sollte ein Auswahlfenster erscheinen und es möglich sein, Schlichte Galerie als Standard-Anwendung auszuwählen.</string>
@@ -356,7 +366,7 @@
     <string name="faq_15_title">Warum beansprucht die App so viel Speicherplatz?</string>
     <string name="faq_15_text">Der Cache der App kann bis zu 250 MB groß werden und sorgt dafür, dass die Bilder schneller geladen werden. Wenn die App noch mehr Speicherplatz beansprucht, liegt das wahrscheinlich daran, dass der Papierkorb zu voll ist. Diese Dateien zählen zum Speicherplatz der App dazu. Du kannst den Papierkorb leeren, indem du ihn öffnest und alle Dateien darin löschst, oder den entsprechenden Button in den Einstellungen betätigst. All 30 Tage wird der Papierkorb automatisch geleert.</string>
     <string name="faq_16_title">Was ist mit dem Ausblenden von Dateien und Ordnern passiert und warum kann ich versteckte Elemente nicht mehr sehen\?</string>
-    <string name="faq_16_text">Ab Android 11 können Sie keine Dateien oder Ordner mehr ein- oder ausblenden, auch in Galerie-Anwendungen können Sie die versteckten Dateien nicht mehr sehen. Dafür müssen Sie ein Dateiverwaltungsprogramm verwenden.</string>
+    <string name="faq_16_text">Ab Android 11 kann man keine Dateien oder Ordner mehr ein- oder ausblenden, auch in anderen Galerie-Anwendungen kann man die versteckten Dateien nicht mehr sehen. Dafür muss man jetzt ein Dateiverwaltungsprogramm verwenden.</string>
     <string name="faq_17_title">Warum kann ich fehlende Ordner nicht mehr einbinden\?</string>
     <string name="faq_17_text">Das funktioniert seit den Systemänderungen mit Android 11 nicht mehr, die Anwendung kann keine echten Ordner mehr durchsuchen, sondern verlässt sich beim Abrufen von Daten auf den so genannten MediaStore.</string>
     <string name="faq_18_title">Warum sehe ich während der Videowiedergabe Werbung\?</string>

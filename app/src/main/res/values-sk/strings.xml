@@ -33,6 +33,7 @@
     <string name="set_as_default_folder">Nastaviť ako predvolený priečinok</string>
     <string name="unset_as_default_folder">Odobrať predvolený priečinok</string>
     <string name="reorder_by_dragging">Zmeniť poradie priečinkov presunutím</string>
+    <string name="reorder_by_dragging_pro">Zmeniť poradie priečinkov presunutím (Pro)</string>
     <string name="restore_to_path">Obnovuje sa do \'%s\'</string>
 
     <!-- Filter -->
@@ -59,6 +60,8 @@
     <string name="hidden_folders">Skryté priečinky</string>
     <string name="manage_hidden_folders">Spravovať skryté priečinky</string>
     <string name="hidden_folders_placeholder">Zdá sa, že nemáte žiadne priečinky skryté pomocou súboru \".nomedia\".</string>
+    <string name="temporarily_show_excluded">Dočasne zobraziť vylúčené</string>
+    <string name="stop_showing_excluded">Ukončiť zobrazovanie vylúčených</string>
 
     <!-- Include folders -->
     <string name="include_folders">Pridané priečinky</string>
@@ -114,6 +117,7 @@
     <string name="home_screen">Plocha</string>
     <string name="lock_screen">Obrazovka uzamknutia</string>
     <string name="home_and_lock_screen">Plocha a obrazovka uzamknutia</string>
+    <string name="allow_changing_aspect_ratio">Povoliť zmenu pomeru strán</string>
 
     <!-- Slideshow -->
     <string name="slideshow">Prezentácia</string>
@@ -124,7 +128,7 @@
     <string name="random_order">Náhodné poradie</string>
     <string name="move_backwards">Ísť opačným smerom</string>
     <string name="loop_slideshow">Automaticky reštartovať prezentáciu</string>
-    <string name="animation">Animácia:</string>
+    <string name="animation">Animácia</string>
     <string name="no_animation">Žiadna</string>
     <string name="fade">Prelínanie</string>
     <string name="slide">Posúvanie</string>
@@ -205,6 +209,10 @@
     <string name="square">Štvorec</string>
     <string name="rounded_corners">Zaoblené rohy</string>
     <string name="export_favorite_paths">Exportovať cesty obľúbených položiek</string>
+    <string name="media_management_prompt">Aby súborové operácie fungovali správne, prosím povoľte túto apku ako Správca médií v nastaveniach zariadenia.</string>
+    <string name="password_protect_excluded">Uzamknúť viditeľnosť vylúčených priečinkov heslom</string>
+    <string name="media_management_manual">Niečo sa pokazilo, prosím choďte do nastavení vášho zariadenia - Aplikácie - Špeciálny prístup aplikácií - Aplikácie na správu médií a povoľte tejto apke správu médií.</string>
+    <string name="media_management_note">Ak presmerovanie nefunguje, prosím choďte do nastavení vášho zariadenia - Aplikácie - Špeciálny prístup aplikácií - Aplikácie na správu médií a povoľte tejto apke správu médií.</string>
 
     <!-- Setting sections -->
     <string name="thumbnails">Náhľady</string>
@@ -363,7 +371,7 @@
     <string name="faq_15_title">Prečo apka zaberá toľko miesta?</string>
     <string name="faq_15_text">Cache apky môže mať maximálne 250MB, zabezpečuje to rýchlejšie načítanie obrázkov. Ak je apka ešte väčšia, bude to pravdepodobne spôsobené množstvom súborov v Odpadkovom koši. Dané súbory sa počítajú do veľkosti apky. Ak ich chcete vymazať, môžete kôš buď otvoriť a položky vymazať manuálne, alebo ho môžete vysypať v nastaveniach apky. Položky v koši sú automaticky mazané po 30 dňoch.</string>
     <string name="faq_16_title">Čo sa stalo s ukrývaním súborov a priečinkov a prečo nevidím žiadne ukryté položky?</string>
-    <string name="faq_16_text">Od Android verzie 11 galérie ako je táto nemôžu ani skryť, ani odokryť žiadne súbory, ani priečinky. Budete na to musieť použiť správcov súborov.</string>
+    <string name="faq_16_text">Od Androidu verzie 11 galérie ako je táto z technických príčin nemôžu ani skryť, ani odokryť žiadne súbory, ani priečinky. Budete na to musieť použiť správcov súborov.</string>
     <string name="faq_17_title">Prečo sa už nedá manuálne pridať chýbajúce priečinky?</string>
     <string name="faq_17_text">Je to taktiež spôsobené zmenami súvisiacimi s Android 11, kedy apka už nevie prehliadať reálne priečinky. V získavaní súborov sa môže iba spoliehať na takzvaný MediaStore.</string>
     <string name="faq_18_title">Prečo sa mi počas prehrávania videí zobrazujú reklamy?</string>

@@ -1,6 +1,5 @@
 package com.simplemobiletools.gallery.pro.extensions
 
-import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
@@ -30,7 +29,6 @@ import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.commons.views.MySquareImageView
 import com.simplemobiletools.gallery.pro.R
-import com.simplemobiletools.gallery.pro.activities.SettingsActivity
 import com.simplemobiletools.gallery.pro.asynctasks.GetMediaAsynctask
 import com.simplemobiletools.gallery.pro.databases.GalleryDatabase
 import com.simplemobiletools.gallery.pro.helpers.*
@@ -43,10 +41,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
-import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 import kotlin.collections.set
 
 val Context.audioManager get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -379,18 +373,16 @@ fun Context.rescanFolderMedia(path: String) {
 }
 
 fun Context.rescanFolderMediaSync(path: String) {
-    getCachedMedia(path) {
-        val cached = it
-        GetMediaAsynctask(applicationContext, path, false, false, false) {
+    getCachedMedia(path) { cached ->
+        GetMediaAsynctask(applicationContext, path, isPickImage = false, isPickVideo = false, showAll = false) { newMedia ->
             ensureBackgroundThread {
-                val newMedia = it
-                val media = newMedia.filter { it is Medium } as ArrayList<Medium>
+                val media = newMedia.filterIsInstance<Medium>() as ArrayList<Medium>
                 try {
                     mediaDB.insertAll(media)
 
-                    cached.forEach {
-                        if (!newMedia.contains(it)) {
-                            val mediumPath = (it as? Medium)?.path
+                    cached.forEach { thumbnailItem ->
+                        if (!newMedia.contains(thumbnailItem)) {
+                            val mediumPath = (thumbnailItem as? Medium)?.path
                             if (mediumPath != null) {
                                 deleteDBPath(mediumPath)
                             }
@@ -662,7 +654,12 @@ fun Context.getCachedDirectories(
         }
 
         val shouldShowHidden = config.shouldShowHidden || forceShowHidden
-        val excludedPaths = config.excludedFolders
+        val excludedPaths = if (config.temporarilyShowExcluded) {
+            HashSet()
+        } else {
+            config.excludedFolders
+        }
+
         val includedPaths = config.includedFolders
 
         val folderNoMediaStatuses = HashMap<String, Boolean>()

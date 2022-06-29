@@ -33,7 +33,8 @@
     <string name="set_as_default_folder">Установить как папку по умолчанию</string>
     <string name="unset_as_default_folder">Отключить как папку по умолчанию</string>
     <string name="reorder_by_dragging">Менять порядок папок перетаскиванием</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
+    <string name="reorder_by_dragging_pro">Менять порядок папок перетаскиванием (Pro)</string>
+    <string name="restore_to_path">Восстановление в \"%s\"</string>
     <!-- Filter -->
     <string name="filter_media">Фильтр медиа</string>
     <string name="images">Изображения</string>
@@ -59,6 +60,8 @@
     <string name="hidden_folders">Скрытые папки</string>
     <string name="manage_hidden_folders">Управление скрытыми папками</string>
     <string name="hidden_folders_placeholder">Похоже, у вас нет папок, скрытых файлом \".nomedia\".</string>
+    <string name="temporarily_show_excluded">Временно показать исключённые</string>
+    <string name="stop_showing_excluded">Не показывать исключённые</string>
     <!-- Include folders -->
     <string name="include_folders">Включённые папки</string>
     <string name="manage_included_folders">Управление включёнными папками</string>
@@ -112,6 +115,7 @@
     <string name="home_screen">Домашний экран</string>
     <string name="lock_screen">Экран блокировки</string>
     <string name="home_and_lock_screen">Домашний экран и экран блокировки</string>
+    <string name="allow_changing_aspect_ratio">Разрешить изменять соотношение сторон</string>
     <!-- Slideshow -->
     <string name="slideshow">Слайдшоу</string>
     <string name="interval">Интервал (в секундах):</string>
@@ -198,6 +202,10 @@
     <string name="square">Квадраты</string>
     <string name="rounded_corners">Закруглённые углы</string>
     <string name="export_favorite_paths">Экспорт путей избранных файлов</string>
+    <string name="media_management_prompt">Чтобы быть уверенным в надёжной работе операций с файлами, сделайте это приложение основным менеджером медиафайлов в настройках устройства.</string>
+    <string name="password_protect_excluded">Защита паролем отображения исключённых папок</string>
+    <string name="media_management_manual">Что-то пошло не так. Откройте настройки устройства и перейдите в: \"Приложения\" → \"Специальный доступ\" → \"Приложения для управления медиа\" и разрешите этому приложению управлять медиа.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Эскизы</string>
     <string name="fullscreen_media">Просмотр медиафайлов</string>
@@ -352,7 +360,7 @@
     <string name="faq_15_title">Почему приложение занимает так много места?</string>
     <string name="faq_15_text">Кеш приложения может занимать до 250 МБ, это обеспечивает более быструю загрузку изображений. Если приложение занимает ещё больше места, это, скорее всего, связано с тем, что в корзине находятся удалённые элементы. Эти файлы прибавляются к размеру приложения. Вы можете очистить корзину или открыв её, или из настроек приложения. Любой файл в корзине автоматически удаляется через 30 дней.</string>
     <string name="faq_16_title">Что случилось со скрытием файлов и папок и почему я больше не вижу скрытые элементы\?</string>
-    <string name="faq_16_text">Начиная с Android 11, вы больше не можете скрывать или отображать файлы или папки, вы также не можете видеть скрытые в приложениях галереи. Для этого вам придётся использовать файловый менеджер.</string>
+    <string name="faq_16_text">Начиная с Android 11, вы больше не можете скрывать или отображать файлы или папки, вы также не можете видеть скрытые в приложениях галереи из-за системных ограничений. Для этого вам придётся использовать файловый менеджер.</string>
     <string name="faq_17_title">Почему я больше не могу включать отсутствующие папки\?</string>
     <string name="faq_17_text">Это перестало работать из-за системных изменений, которые пришли с Android 11: приложение больше не может просматривать реальные папки, оно полагается на так называемый MediaStore при получении данных.</string>
     <string name="faq_18_title">Почему я вижу рекламу во время воспроизведения видео\?</string>

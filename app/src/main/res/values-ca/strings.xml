@@ -39,7 +39,8 @@
     <string name="set_as_default_folder">Estableix com a carpeta predeterminada</string>
     <string name="unset_as_default_folder">Desactiva com a carpeta predeterminada</string>
     <string name="reorder_by_dragging">Reordeneu les carpetes arrossegant-les</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
+    <string name="reorder_by_dragging_pro">Reordeneu les carpetes arrossegant-les (Pro)</string>
+    <string name="restore_to_path">S\'està restaurant a «%s»</string>
     <!-- Filter -->
     <string name="filter_media">Filtre multimèdia</string>
     <string name="images">Imatges</string>
@@ -65,6 +66,8 @@
     <string name="hidden_folders">Carpetes ocultes</string>
     <string name="manage_hidden_folders">Gestiona les carpetes ocultes</string>
     <string name="hidden_folders_placeholder">Sembla que no teniu cap carpeta oculta amb el fitxer «.nomedia».</string>
+    <string name="temporarily_show_excluded">Mostra temporalment les excloses</string>
+    <string name="stop_showing_excluded">Deixa de mostrar les excloses</string>
     <!-- Include folders -->
     <string name="include_folders">Carpetes incloses</string>
     <string name="manage_included_folders">Gestiona les carpetes incloses</string>
@@ -120,6 +123,7 @@
     <string name="home_screen">Pantalla d\'inici</string>
     <string name="lock_screen">Pantalla de bloqueig</string>
     <string name="home_and_lock_screen">Pantalla d\'inici i de bloqueig</string>
+    <string name="allow_changing_aspect_ratio">Permet canviar la relació d\'aspecte</string>
     <!-- Slideshow -->
     <string name="slideshow">Presentació de diapositives</string>
     <string name="interval">Interval (segons):</string>
@@ -181,7 +185,7 @@
     <string name="hide_extended_details">Oculta els detalls ampliats quan la barra d\'estat està oculta</string>
     <string name="show_at_bottom">Mostra alguns botons d\'acció a la part inferior de la pantalla</string>
     <string name="show_recycle_bin">Mostra la paperera de reciclatge a la pantalla de carpetes</string>
-    <string name="deep_zoomable_images">Imatges ampliables a fons</string>
+    <string name="deep_zoomable_images">Imatges ampliables profundament</string>
     <string name="show_highest_quality">Mostra les imatges amb la màxima qualitat possible</string>
     <string name="show_recycle_bin_last">Mostra la paperera de reciclatge com a últim element a la pantalla principal</string>
     <string name="allow_down_gesture">Permet tancar la vista de pantalla completa amb un gest cap avall</string>
@@ -206,6 +210,10 @@
     <string name="square">Quadrat</string>
     <string name="rounded_corners">Cantonades arrodonides</string>
     <string name="export_favorite_paths">Exporta els camins dels fitxers preferits</string>
+    <string name="media_management_prompt">Per assegurar que totes les operacions de fitxers funcionin de manera fiable, feu que aquesta aplicació sigui una aplicació de gestió multimedia a la configuració del dispositiu.</string>
+    <string name="password_protect_excluded">Protegeix amb contrasenya la visibilitat de les carpetes excloses</string>
+    <string name="media_management_manual">S\'ha produït un error, aneu a la Configuració del dispositiu - Aplicacions - Accés especial a l\'aplicació - Aplicacions de gestió multimèdia i permeteu que aquesta aplicació gestioni el contingut multimèdia.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Miniatures</string>
     <string name="fullscreen_media">Contingut multimèdia a pantalla completa</string>
@@ -352,13 +360,13 @@
     <string name="faq_12_title">L\'ordenació per la data de presa no sembla funcionar correctament, com puc solucionar-ho\?</string>
     <string name="faq_12_text">Probablement, els fitxers s\'han copiat des de qualsevol lloc. Podeu arreglar-ho seleccionant les miniatures de fitxer i seleccionant «Corregeix el valor de la data de presa».</string>
     <string name="faq_13_title">Veig algunes bandes de colors a les imatges. Com puc millorar la qualitat?</string>
-    <string name="faq_13_text">La solució actual per mostrar imatges funciona bé en la gran majoria dels casos, però si voleu obtenir una qualitat d\'imatge millor, podeu activar «Mostra les imatges amb la màxima qualitat possible» a la configuració de l\'aplicació, a la secció «Imatges ampliables a fons».</string>
+    <string name="faq_13_text">La solució actual per mostrar imatges funciona bé en la gran majoria dels casos, però si voleu obtenir una qualitat d\'imatge millor, podeu activar «Mostra les imatges amb la màxima qualitat possible» a la configuració de l\'aplicació, a la secció «Imatges ampliables profundament».</string>
     <string name="faq_14_title">He ocultat un fitxer/carpeta. Com puc mostrar-ho\?</string>
     <string name="faq_14_text">Podeu prémer l\'element de menú «Mostra temporalment els elements ocults» a la pantalla principal o canviar «Mostra els elements ocults» a la configuració de l\'aplicació per veure l\'element ocult. Si el voleu mostrar, premeu-lo i seleccioneu «Mostra». Les carpetes s\'oculten afegint un fitxer «.nomedia» ocult en elles, també podeu eliminar el fitxer amb qualsevol gestor de fitxers. Tingueu en compte que l\'ocultació funciona recursivament, així que si oculteu una carpeta, totes les subcarpetes també es faran ocultes. Per tant, per a fer visibles les subcarpetes cal mostrar la carpeta superior.</string>
     <string name="faq_15_title">Per què l\'aplicació ocupa tant espai\?</string>
     <string name="faq_15_text">La memòria cau de l\'aplicació pot ocupar fins a 250 MB, i garanteix una càrrega més ràpida de les imatges. Si l\'aplicació ocupa més espai, probablement serà perquè hi ha elements a la paperera de reciclatge. Aquests fitxers compten en la mida de l\'aplicació. Podeu netejar la paperera de reciclatge obrint-la i suprimint tots els fitxers, o des de la configuració de l\'aplicació. Els fitxers de la paperera s\'eliminen automàticament després de 30 dies.</string>
     <string name="faq_16_title">Què ha passat amb l\'ocultació de fitxers i carpetes i per què ja no puc veure els elements ocults\?</string>
-    <string name="faq_16_text">A partir d\'Android 11, ja no podeu amagar ni mostrar fitxers o carpetes, tampoc no podeu veure els ocults a les aplicacions de galeria. Haureu d\'utilitzar algun gestor de fitxers per a això.</string>
+    <string name="faq_16_text">A partir d\'Android 11, ja no podeu amagar ni mostrar carpetes ni fitxers, tampoc no podeu veure els ocults a les aplicacions de galeria degut a restriccions del sistema. Haureu d\'utilitzar algun gestor de fitxers per a això.</string>
     <string name="faq_17_title">Per què ja no puc incloure les carpetes que manquen\?</string>
     <string name="faq_17_text">Això ha deixat de funcionar a causa dels canvis del sistema que també han vingut amb Android 11, l\'aplicació ja no pot navegar per carpetes reals, es basa en l\'anomenat MediaStore per obtenir dades.</string>
     <string name="faq_18_title">Per què veig anuncis comercials durant la reproducció de vídeo\?</string>

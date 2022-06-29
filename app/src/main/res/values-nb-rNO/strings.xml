@@ -33,8 +33,8 @@
     <string name="set_as_default_folder">Sett som standardmappe</string>
     <string name="unset_as_default_folder">Ikke lenger sett som standardmappe</string>
     <string name="reorder_by_dragging">Endre mapperekkefølge ved å dra</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
-
+    <string name="reorder_by_dragging_pro">Endre mapperekkefølge ved å dra (Pro)</string>
+    <string name="restore_to_path">Gjenoppretter til \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">Filtrer media</string>
     <string name="images">Bilder</string>
@@ -58,6 +58,8 @@
     <string name="hidden_folders">Skjulte mapper</string>
     <string name="manage_hidden_folders">Håndter skjulte mapper</string>
     <string name="hidden_folders_placeholder">Ser ut til at du ikke har skjult noen mapper med en \".nomedia\"-fil.</string>
+    <string name="temporarily_show_excluded">Vis ekskluderte midlertidig</string>
+    <string name="stop_showing_excluded">Stopp å vise ekskluderte</string>
     <!-- Include folders -->
     <string name="include_folders">Inkluderte mapper</string>
     <string name="manage_included_folders">Håndter inkluderte mapper</string>
@@ -111,6 +113,7 @@
     <string name="home_screen">Startskjerm</string>
     <string name="lock_screen">Låseskjerm</string>
     <string name="home_and_lock_screen">Start- og låseskjerm</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">Lysbildeshow</string>
     <string name="interval">Intervall (sekunder):</string>
@@ -197,6 +200,10 @@
     <string name="square">Firkantet</string>
     <string name="rounded_corners">Avrundede hjørner</string>
     <string name="export_favorite_paths">Eksporter favorittfilbaner</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Passordbeskytt synlighet for ekskludert mappe</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Minibilder</string>
     <string name="fullscreen_media">Mediavisning</string>

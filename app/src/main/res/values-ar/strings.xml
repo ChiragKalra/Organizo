@@ -15,7 +15,7 @@
     <string name="other_folder">مجلد آخر</string>
     <string name="show_on_map">عرض على الخريطة</string>
     <string name="unknown_location">موقع غير معروف</string>
-    <string name="volume">الصوت</string>
+    <string name="volume">مستوى الصوت</string>
     <string name="brightness">السطوع</string>
     <string name="lock_orientation">قفل الاتجاه</string>
     <string name="unlock_orientation">فتح الاتجاه</string>
@@ -35,12 +35,12 @@
 \nسيكون لديك فقط سلة المحذوفات العناصر المحذوفة، والعناصر المفضلة غير ملحوظ وسيكون لديك أيضا لإعادة تعيين إعدادات التطبيق الخاص بك.
 \n
 \nشكرا!</string>
-    <string name="switch_to_file_search">التبديل إلي البحث فى الملفات عبر كافة المجلدات المرئية</string>
+    <string name="switch_to_file_search">التبديل إلى البحث فى الملفات عبر كافة المجلدات المرئية</string>
     <string name="set_as_default_folder">تعيين كمجلد افتراضي</string>
     <string name="unset_as_default_folder">إلغاء التعيين كمجلد افتراضي</string>
     <string name="reorder_by_dragging">إعادة ترتيب المجلدات عن طريق السحب</string>
-    <string name="restore_to_path">Restoring to \'%s\'</string>
-
+    <string name="reorder_by_dragging_pro">إعادة ترتيب المجلدات عن طريق السحب (Pro)</string>
+    <string name="restore_to_path">الاستعادة إلى \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">فلترة الوسائط</string>
     <string name="images">الصور</string>
@@ -57,15 +57,17 @@
     <string name="excluded_folders">المجلدات المستبعدة</string>
     <string name="manage_excluded_folders">إدارة المجلدات المستبعدة</string>
     <string name="exclude_folder_description">سيؤدي ذلك الي إستبعاد التحديد مع المجلدات الفرعية من "الاستديو" فقط.. يمكنك إدارة المجلدات المستبعدة في الإعدادات.</string>
-    <string name="exclude_folder_parent">إستبعاد المجلد الأصل بدلاً  من ذلك(المحدد)؟</string>
+    <string name="exclude_folder_parent">استبعاد المجلد الأصل بدلاً من ذلك (المحدد)؟</string>
     <string name="excluded_activity_placeholder">سيؤدي استبعاد المجلدات الي جعلها مع المجلدات الفرعية مخفية في الاستديو فقط، وستظل مرئية في تطبيقات أخرى.
 \n
 \nإذا كنت تريد إخفاءها من التطبيقات الأخرى أيضاً، فاستخدم وظيفة الإخفاء.</string>
     <string name="remove_all">إزالة الكل</string>
-    <string name="remove_all_description">هل تريد إزالة كافة المجلدات من قائمة  المجلدات المستبعدة ؟ لن يؤدي هذا إلي حذف المجلدات.</string>
+    <string name="remove_all_description">هل تريد إزالة كافة المجلدات من قائمة المجلدات المستبعدة؟ لن يؤدي هذا إلى حذف المجلدات.</string>
     <string name="hidden_folders">المجلدات المخفية</string>
     <string name="manage_hidden_folders">إدارة المجلدات المخفية</string>
     <string name="hidden_folders_placeholder">يبدو أنه لا توجد لديك أي مجلدات مخفية بملف \".nomedia\".</string>
+    <string name="temporarily_show_excluded">إظهار الملفات المستبعدة مؤقتا</string>
+    <string name="stop_showing_excluded">إيقاف عرض الملفات المستبعدة</string>
     <!-- Include folders -->
     <string name="include_folders">المجلدات المضمنة</string>
     <string name="manage_included_folders">إدارة المجلدات المضمنة</string>
@@ -121,6 +123,7 @@
     <string name="home_screen">الشاشة الرئيسية</string>
     <string name="lock_screen">شاشة القفل</string>
     <string name="home_and_lock_screen">الشاشة الرئيسية وشاشة القفل</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">عرض الشرائح</string>
     <string name="interval">الفاصل الزمني (بالثواني):</string>
@@ -150,7 +153,7 @@
     <string name="by_date_taken_monthly">آخر تعديل (شهرياً)</string>
     <string name="by_file_type">نوع الملف</string>
     <string name="by_extension">الإمتداد</string>
-    <string name="show_file_count_section_header">Show file count at section headers</string>
+    <string name="show_file_count_section_header">إظهار عدد الملفات في رؤوس الأقسام</string>
     <string name="grouping_and_sorting">يرجى ملاحظة أن التجميع والفرز هما حقلان مستقلان</string>
     <!-- Widgets -->
     <string name="folder_on_widget">المجلد الظاهر فى الويدجت:</string>
@@ -207,6 +210,10 @@
     <string name="square">مربع</string>
     <string name="rounded_corners">زوايا مستديرة</string>
     <string name="export_favorite_paths">تصدير مسارات الملفات المفضلة</string>
+    <string name="media_management_prompt">للتأكد من أن جميع عمليات الملفات تعمل بشكل موثوق ، يرجى جعل هذا التطبيق تطبيقا لإدارة الوسائط في إعدادات جهازك.</string>
+    <string name="password_protect_excluded">Password protect excluded folder visibility</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">الصور المصغّرة</string>
     <string name="fullscreen_media">وسائط ملء الشاشة</string>
@@ -255,19 +262,19 @@
     <string name="pesdk_text_button_color">اللون</string>
     <string name="pesdk_text_button_backgroundColor">لون الخلفية</string>
     <string name="pesdk_text_button_alignment">محاذاة</string>
-    <string name="pesdk_text_button_bringToFront">إلي الأمام</string>
+    <string name="pesdk_text_button_bringToFront">إلى الأمام</string>
     <string name="pesdk_text_button_delete">حذف</string>
     <string name="pesdk_text_text_editTextPlaceholder">النص الخاص بك</string>
     <string name="pesdk_brush_title_name">الفرشاة</string>
     <string name="pesdk_brush_button_color">اللون</string>
     <string name="pesdk_brush_button_size">الحجم</string>
     <string name="pesdk_brush_button_hardness">الصلابة</string>
-    <string name="pesdk_brush_button_bringToFront">إلي الأمام</string>
+    <string name="pesdk_brush_button_bringToFront">إلى الأمام</string>
     <string name="pesdk_brush_button_delete">حذف</string>
     <string name="pesdk_brush_title_brushColor">لون الفرشاة</string>
     <string name="pesdk_editor_title_name">المحرر</string>
     <string name="pesdk_editor_title_closeEditorAlert">هل تريد إغلاق المحرر؟</string>
-    <string name="pesdk_editor_text_closeEditorAlert">هل تريد حقا تجاهل التغييرات؟</string>
+    <string name="pesdk_editor_text_closeEditorAlert">هل حقًا تريد تجاهل التغييرات؟</string>
     <string name="pesdk_editor_button_closeEditorAlertConfirmation">نعم</string>
     <string name="pesdk_editor_button_closeEditorAlertCancelation">لا</string>
     <string name="pesdk_editor_cancel">إلغاء</string>
@@ -330,15 +337,15 @@
     <string name="pesdk_common_title_pipettableColor">Pipettable لون</string>
     <string name="vesdk_video_trim_title_name">تقليم</string>
     <!-- FAQ -->
-    <string name="faq_1_title">كيف يمكنني جعل تطبيق الاستديو معرض الجهاز الإفتراضي ؟</string>
+    <string name="faq_1_title">كيف يمكنني جعل تطبيق الاستديو معرض الجهاز الإفتراضي؟</string>
     <string name="faq_1_text">أولا، يجب عليك العثور على المعرض الافتراضي الحالي في قسم التطبيقات من إعدادات الجهاز، أبحث عن زر يقول شيئاً مثل \"فتح كافتراضي/، ثم أنقر عليه، ثم حدد \"مسح الإعدادات الإفتراضية\". في المرة القادمة التي ستحاول فيها فتح صورة أو مقطع فيديو يجب أن تري اختيار تطبيق، حيث يمكنك تحديد تطبيق الاستديو وجعله التطبيق الافتراضي.</string>
     <string name="faq_2_title">لقد أغلقت التطبيق بكلمة مرور، لكنني نسيتها. ماذا يمكنني أن أفعل؟</string>
     <string name="faq_2_text">يمكنك حلها بطريقتين. يمكنك إما إعادة تثبيت التطبيق أو البحث عن التطبيق في إعدادات جهازك وتحديد \"مسح البيانات\". سيتم إعادة تعيين كل إعداداتك، ولن يقوم بإزالة أي ملفات وسائط.</string>
-    <string name="faq_3_title">كيف يمكنني جعل ألبوماً يظهر دائماً في الأعلى ؟</string>
-    <string name="faq_3_text">يمكنك الضغط مطولاً علي الألبوم المطلوب وحدد أيقونة التثبيت في قائمة الإجراءات، التي ستقوم بتثبيته في الأعلى. يمكنك تثبيت مجلدات متعددة أيضا، سيتم فرز العناصر المثبتة حسب طريقة الفرز الافتراضية.</string>
+    <string name="faq_3_title">كيف يمكنني جعل ألبوماً يظهر دائماً في الأعلى؟</string>
+    <string name="faq_3_text">يمكنك الضغط مطولًا على الألبوم المطلوب وحدد أيقونة التثبيت في قائمة الإجراءات، التي ستقوم بتثبيته في الأعلى. يمكنك تثبيت مجلدات متعددة أيضًا، سيتم فرز العناصر المثبتة حسب طريقة الفرز الافتراضية.</string>
     <string name="faq_4_title">كيف يمكنني تسريع مقاطع الفيديو؟</string>
     <string name="faq_4_text">يمكنك القيام بذلك عن طريق النقر المزدوج على جانب الشاشة، أو النقر على نصوص المدة الحالية أو القصوى بالقرب من شريط التمرير. إذا قمت بتمكين فتح مقاطع الفيديو على شاشة منفصلة في إعدادات التطبيق، يمكنك استخدام الإيماءات الأفقية أيضاً.</string>
-    <string name="faq_5_title">ما هو الفرق بين إخفاء المجلد وإستبعاده ؟</string>
+    <string name="faq_5_title">ما الفرق بين إخفاء المجلد واستبعاده؟</string>
     <string name="faq_5_text">لاحظ أن بعض الأجهزة لا تسمح بإخفاء المجلدات مثل الكاميرا ولقطات الشاشة والتنزيلات. الاستبعاد يمنع عرض المجلد فقط في الاستديو، بينما الإخفاء يعمل على مستوى النظام ويخفي المجلد من المعارض الأخرى أيضاً. يعمل عن طريق إنشاء ملف فارغ .nomedia \" في المجلد المحدد، والذي يمكنك إزالته بعد ذلك بواسطة أي مدير ملفات أيضًا.</string>
     <string name="faq_6_title">لماذا تظهر المجلدات مع صورة غلاف الموسيقى أو الملصقات؟</string>
     <string name="faq_6_text">قد يحدث أن ترى بعض الألبومات غير العادية تظهر. يمكنك بسهولة إستبعادهم بالضغط مطولاً عليهم وأختر إستبعاد. في مربع الحوار التالي يمكنك بعد ذلك تحديد المجلد الاصل، من المحتمل أن يمنع ظهور الألبومات الأخرى ذات الصلة أيضاً.</string>
@@ -346,24 +353,24 @@
     <string name="faq_7_text">قد يكون لهذا عدة أسباب، ولكن حل هذه المشكلة أمر سهل. فقط أذهب إلى الإعدادات -&gt; إدارة المجلدات المضمنة، وأختر علامة زائد (+) وانتقل إلى المجلد المطلوب.</string>
     <string name="faq_8_title">ماذا أفعل لو كنت أريد بعض المجلدات المحددة مرئية فقط؟</string>
     <string name="faq_8_text">إضافة مجلد إلى المجلدات المضمنة لا يستبعد تلقائياً أي شيء. ما يمكنك القيام به هو الإنتقال إلى الإعدادات -&gt; إدارة المجلدات المستبعدة، استبعاد المجلد الأصل \"/\"، ثم إضافة المجلدات المطلوبة في الإعدادات -&gt; إدارة المجلدات المضمنة. سيؤدي ذلك إلى جعل المجلدات المحددة مرئية فقط، حيث أن كل من الاستبعاد والتضمين منعكسين وإذا كان أحد المجلدات مستبعداً ومضمن معاً، فسوف يظهر.</string>
-    <string name="faq_10_title">هل يمكنني إقتصاص الصور باستخدام هذا التطبيق؟</string>
+    <string name="faq_10_title">هل يمكنني اقتصاص الصور باستخدام هذا التطبيق؟</string>
     <string name="faq_10_text">نعم، يمكنك اقتصاص الصور في المحرر، عن طريق سحب زوايا الصورة. يمكنك الوصول إلى المحرر إما بالضغط مطولاً على الصورة المصغرة واختيار تعديل، أو اختيار تعديل من عرض ملء الشاشة.</string>
     <string name="faq_11_title">هل يمكنني بطريقة ما تجميع الصور المصغرة لملف الوسائط؟</string>
-    <string name="faq_11_text">بالتأكيد، فقط استخدم عنصر القائمة \"تجميع حسب\" أثناء عرض الصور المصغرة. يمكنك تجميع الملفات حسب معايير متعددة، بما في ذلك تاريخ الالتقاط. إذا كنت تستخدم وظيفة \"إظهار كل محتويات المجلدات\" فيمكنك تجميعها حسب المجلدات أيضا.</string>
+    <string name="faq_11_text">بالتأكيد، فقط استخدم عنصر القائمة \"تجميع حسب\" أثناء عرض الصور المصغرة. يمكنك تجميع الملفات حسب معايير متعددة، بما في ذلك تاريخ الالتقاط. إذا كنت تستخدم وظيفة \"إظهار كل محتويات المجلدات\" فيمكنك تجميعها حسب المجلدات أيضًا.</string>
     <string name="faq_12_title">يبدو ان الفرز حسب تاريخ الالتقاط لا يعمل بشكل صحيح، كيف يمكنني إصلاحه؟</string>
     <string name="faq_12_text">غالباً ما يكون ذلك بسبب الملفات التي يتم نسخها من مكان ما. يمكنك اصلاحه عن طريق تحديد الصور المصغرة للملف وأختر \"إصلاح تاريخ إلتقاط القيمة\".</string>
     <string name="faq_13_title">أرى بعض التباين اللونى على الصور. كيف يمكنني تحسين الجودة؟</string>
     <string name="faq_13_text">الحل الحالي لعرض الصور يعمل بشكل جيد في الأغلبية العظمى للحالات، ولكن إذا كنت تريد تحسين جودة الصور، يمكنك تمكين خيار \"عرض الصور بأعلي جودة ممكنة\" من إعدادات التطبيق، من قسم \"الصور العميقة القابلة للتكبير\".</string>
     <string name="faq_14_title">لقد قمت بإخفاء ملف/مجلد. كيف يمكنني إظهاره؟</string>
-    <string name="faq_14_text">Note that hiding works recursively though, so if you hide a folder, all subfolders will become hidden too. So for unhiding the subfolders you have to unhide the parent folder.يمكنك أما أن تضغط علي عنصر القائمة إظهار العناصر المخفية مؤقتاً علي الشاشه الرئيسية أو تفعيل خيار \"إظهار العناصر المخفية في إعدادات التطبيق لرؤية العنصر المخفي. إذا كنت تريد إظهاره ، فقط أضغط مطولاً عليه وأختر \" إظهار\". يتم إخفاء المجلدات عن طريق إضافة ملف مخفي . nomedia/ إليهم، يمكنك حذف الملف بواسطة أي مدير ملفات أيضاً.</string>
+    <string name="faq_14_text">يمكنك إما الضغط على عنصر القائمة \"إظهار العناصر المخفية مؤقتا\" في الشاشة الرئيسية ، أو تبديل \"إظهار العناصر المخفية\" في إعدادات التطبيق لرؤية العنصر المخفي. إذا كنت ترغب في إظهاره ، فما عليك سوى الضغط عليه لفترة طويلة وتحديد \"إظهار\". يتم إخفاء المجلدات عن طريق إضافة ملف \".nomedia\" مخفي إليها ، يمكنك حذف الملف مع أي مدير ملفات أيضا. لاحظ أن الإخفاء يعمل بشكل متكرر ، لذلك إذا قمت بإخفاء مجلد ، فستصبح جميع المجلدات الفرعية مخفية أيضا. لذلك لإلغاء إخفاء المجلدات الفرعية ، يجب عليك إظهار المجلد الأصل.</string>
     <string name="faq_15_title">لماذا يشغل التطبيق مساحة كبيرة؟</string>
     <string name="faq_15_text">يمكن لذاكرة التخزين المؤقت للتطبيق أن تصل سعتها إلى 250 ميجابايت، مما يضمن سرعة تحميل الصور. إذا كان التطبيق يشغل مساحة أكبر، فمن المحتمل أن يكون ذلك بسبب وجود عناصر في سلة المحذوفات. يتم حساب هذه الملفات إلى حجم التطبيق. يمكنك مسح سلة المحذوفات عن طريق فتحها وحذف جميع الملفات، أو من إعدادات التطبيق. يتم حذف كل ملف في سلة المحذوفات تلقائياً بعد 30 يوماً.</string>
-    <string name="faq_16_title">What happened to file and folder hiding and why cannot I see hidden items anymore?</string>
-    <string name="faq_16_text">Starting with Android 11 you cannot hide or unhide files or folders anymore, you cannot see the hidden ones in gallery apps either. You will have to use some file manager for that.</string>
-    <string name="faq_17_title">Why cannot I include missing folders anymore?</string>
-    <string name="faq_17_text">That stopped working due to the system changes that came with Android 11 too, the app cannot browse real folders anymore, it relies on the so called MediaStore at fetching data.</string>
-    <string name="faq_18_title">Why do I see ads during video playback?</string>
-    <string name="faq_18_text">Our apps have no ads whatsoever. If you see them during video playback, you must be using some other apps video player. Try finding your default video player in the device settings, then do a \"Clear defaults\" on it. The next time you invoke some video intent you will see an app picker prompt, where you can select what app you want to use.</string>
+    <string name="faq_16_title">ماذا حدث لإخفاء الملفات والمجلدات ولماذا لا يمكنني رؤية العناصر المخفية بعد الآن؟</string>
+    <string name="faq_16_text">بدءا من Android 11 ، لا يمكنك إخفاء أو إظهار الملفات أو المجلدات بعد الآن ، ولا يمكنك رؤية الملفات أو المجلدات المخفية في تطبيقات المعرض بسبب قيود النظام أيضا. سيكون عليك استخدام بعض مدير الملفات لذلك.</string>
+    <string name="faq_17_title">لماذا لا يمكنني تضمين المجلدات المفقودة بعد الآن؟</string>
+    <string name="faq_17_text">توقف ذلك عن العمل بسبب تغييرات النظام التي جاءت مع Android 11 أيضا ، ولم يعد بإمكان التطبيق تصفح المجلدات الحقيقية بعد الآن ، فهو يعتمد على ما يسمى MediaStore في جلب البيانات.</string>
+    <string name="faq_18_title">لماذا أشاهد الإعلانات أثناء تشغيل الفيديو؟</string>
+    <string name="faq_18_text">لا تحتوي تطبيقاتنا على أي إعلانات على الإطلاق. إذا رأيتها أثناء تشغيل الفيديو، فيجب أن تستخدم مشغل فيديو بعض التطبيقات الأخرى. حاول العثور على مشغل الفيديو الافتراضي في إعدادات الجهاز، ثم قم بإجراء \"مسح الإعدادات الافتراضية\" عليه. في المرة التالية التي تستدعي فيها بعض نوايا الفيديو ، سترى مطالبة منتقي التطبيقات ، حيث يمكنك تحديد التطبيق الذي تريد استخدامه.</string>
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- App title has to have less than 50 characters. If you cannot squeeze it, just remove a part of it -->
     <string name="app_title">المعرض البسيط (Pro) - محرر ومدير الصور</string>

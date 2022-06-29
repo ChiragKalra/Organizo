@@ -33,6 +33,7 @@
     <string name="set_as_default_folder">Set as default folder</string>
     <string name="unset_as_default_folder">Unset as default folder</string>
     <string name="reorder_by_dragging">Reorder folders by dragging</string>
+    <string name="reorder_by_dragging_pro">Reorder folders by dragging (Pro)</string>
     <string name="restore_to_path">Restoring to \'%s\'</string>
     <!-- Filter -->
     <string name="filter_media">Filtrar medios</string>
@@ -57,6 +58,8 @@
     <string name="hidden_folders">Cartafoles ocultos</string>
     <string name="manage_hidden_folders">Xestionar cartafoles ocultos</string>
     <string name="hidden_folders_placeholder">Semella que non tes ningún cartafol oculto cun ficheiro \".nomedia\".</string>
+    <string name="temporarily_show_excluded">Temporarily show excluded</string>
+    <string name="stop_showing_excluded">Stop showing excluded</string>
     <!-- Include folders -->
     <string name="include_folders">Cartafoles incluídos</string>
     <string name="manage_included_folders">Xestionar cartafoles incluídos</string>
@@ -110,6 +113,7 @@
     <string name="home_screen">Pantalla de incio</string>
     <string name="lock_screen">Pantalla de bloqueo</string>
     <string name="home_and_lock_screen">Pantallas de inicio e bloqueo</string>
+    <string name="allow_changing_aspect_ratio">Allow changing the aspect ratio</string>
     <!-- Slideshow -->
     <string name="slideshow">Presentación</string>
     <string name="interval">Intervalo (segundos):</string>
@@ -196,6 +200,10 @@
     <string name="square">Square</string>
     <string name="rounded_corners">Rounded corners</string>
     <string name="export_favorite_paths">Export favorite file paths</string>
+    <string name="media_management_prompt">To make sure that all file operations work reliably, please make this app a Media management app in your device settings.</string>
+    <string name="password_protect_excluded">Visibilidade do cartafol protexida con contrasinal</string>
+    <string name="media_management_manual">Something went wrong, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
+    <string name="media_management_note">If the redirection does not work, please go into your device Settings - Apps - Special app access - Media management apps and allow this app to manage media.</string>
     <!-- Setting sections -->
     <string name="thumbnails">Iconas</string>
     <string name="fullscreen_media">Medios a pantalla completa</string>
@@ -350,7 +358,7 @@
     <string name="faq_15_title">Por que consume tanto espacio este aplicativo?</string>
     <string name="faq_15_text">Os ficheiros temporais poden chegar aos 250MB e server para cargar máis rápido. Se o aplicativo está a a consumir máis espazo, o máis probable é que teña ficheiros na Papeleira de Reciclaxe.Estes ficheiros contan no tamaño da aplicación.Podes baleirala abríndoa e borrando os ficheiros, ou desde a configuración.Cada ficheiro da Papeleira bórrase automáticamente tras 30 días.</string>
     <string name="faq_16_title">What happened to file and folder hiding and why cannot I see hidden items anymore?</string>
-    <string name="faq_16_text">Starting with Android 11 you cannot hide or unhide files or folders anymore, you cannot see the hidden ones in gallery apps either. You will have to use some file manager for that.</string>
+    <string name="faq_16_text">Desde Android 11 xa non podes agochar ou mostrar cartafoles, non podes ver os agochados nas apps galería debido a restricións dos sistema. Terás que usar algún xestor de ficheiros para isto.</string>
     <string name="faq_17_title">Why cannot I include missing folders anymore?</string>
     <string name="faq_17_text">That stopped working due to the system changes that came with Android 11 too, the app cannot browse real folders anymore, it relies on the so called MediaStore at fetching data.</string>
     <string name="faq_18_title">Why do I see ads during video playback?</string>
