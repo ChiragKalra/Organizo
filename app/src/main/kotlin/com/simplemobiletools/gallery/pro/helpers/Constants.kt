@@ -4,6 +4,8 @@ import com.simplemobiletools.commons.helpers.MONTH_SECONDS
 import com.simplemobiletools.commons.helpers.isQPlus
 
 // shared preferences
+const val IMAGE_CATEGORY_THRESHOLD = "image_category_threshold"
+const val OBJECT_DETECTION_THRESHOLD = "object_detection_threshold"
 const val DIRECTORY_SORT_ORDER = "directory_sort_order"
 const val GROUP_FOLDER_PREFIX = "group_folder_"
 const val VIEW_TYPE_PREFIX = "view_type_folder_"
@@ -177,6 +179,7 @@ const val TYPE_GIFS = 4
 const val TYPE_RAWS = 8
 const val TYPE_SVGS = 16
 const val TYPE_PORTRAITS = 32
+const val TYPE_USELESS = 64
 
 fun getDefaultFileFilter() = TYPE_IMAGES or TYPE_VIDEOS or TYPE_GIFS or TYPE_RAWS or TYPE_SVGS
 
@@ -194,6 +197,7 @@ const val GROUP_BY_LAST_MODIFIED_MONTHLY = 64
 const val GROUP_BY_DATE_TAKEN_MONTHLY = 128
 const val GROUP_DESCENDING = 1024
 const val GROUP_SHOW_FILE_COUNT = 2048
+const val GROUP_BY_CATEGORY = 4096
 
 // bottom actions
 const val BOTTOM_ACTION_TOGGLE_FAVORITE = 1

@@ -15,6 +15,14 @@ class Config(context: Context) : BaseConfig(context) {
         fun newInstance(context: Context) = Config(context)
     }
 
+    var imageCategoryThreshold: Float
+        get() = prefs.getFloat(IMAGE_CATEGORY_THRESHOLD, .90f)
+        set(value) = prefs.edit().putFloat(IMAGE_CATEGORY_THRESHOLD, value).apply()
+
+    var objectDetectionThreshold: Float
+        get() = prefs.getFloat(OBJECT_DETECTION_THRESHOLD, .75f)
+        set(value) = prefs.edit().putFloat(OBJECT_DETECTION_THRESHOLD, value).apply()
+
     var directorySorting: Int
         get(): Int = prefs.getInt(DIRECTORY_SORT_ORDER, SORT_BY_DATE_MODIFIED or SORT_DESCENDING)
         set(order) = prefs.edit().putInt(DIRECTORY_SORT_ORDER, order).apply()
@@ -326,7 +334,7 @@ class Config(context: Context) : BaseConfig(context) {
         set(tempFolderPath) = prefs.edit().putString(TEMP_FOLDER_PATH, tempFolderPath).apply()
 
     var viewTypeFolders: Int
-        get() = prefs.getInt(VIEW_TYPE_FOLDERS, VIEW_TYPE_GRID)
+        get() = prefs.getInt(VIEW_TYPE_FOLDERS, VIEW_TYPE_LIST)
         set(viewTypeFolders) = prefs.edit().putInt(VIEW_TYPE_FOLDERS, viewTypeFolders).apply()
 
     var viewTypeFiles: Int

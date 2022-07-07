@@ -52,6 +52,7 @@ class GetMediaAsynctask(val context: Context, val mPath: String, val isPickImage
         return mediaFetcher.groupMedia(media, pathToUse)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onPostExecute(media: ArrayList<ThumbnailItem>) {
         super.onPostExecute(media)
         callback(media)

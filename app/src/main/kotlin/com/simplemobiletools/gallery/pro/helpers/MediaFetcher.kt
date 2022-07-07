@@ -137,7 +137,7 @@ class MediaFetcher(val context: Context) {
         }
     }
 
-    private fun getLatestFileFolders(): LinkedHashSet<String> {
+    private fun  getLatestFileFolders(): LinkedHashSet<String> {
         val uri = Files.getContentUri("external")
         val projection = arrayOf(Images.ImageColumns.DATA)
         val parents = LinkedHashSet<String>()

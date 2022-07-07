@@ -78,12 +78,12 @@ class DirectoryAdapter(
     var dateFormat = config.dateFormat
     var timeFormat = activity.getTimeFormat()
 
-    init {
+/*    init {
         setupDragListener(true)
         fillLockedFolders()
-    }
+    }*/
 
-    override fun getActionMenuId() = R.menu.cab_directories
+    override fun getActionMenuId() = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutType = when {
@@ -106,6 +106,7 @@ class DirectoryAdapter(
     override fun getItemCount() = dirs.size
 
     override fun prepareActionMode(menu: Menu) {
+        super.actMode?.finish()
         val selectedPaths = getSelectedPaths()
         if (selectedPaths.isEmpty()) {
             return
@@ -162,9 +163,9 @@ class DirectoryAdapter(
         }
     }
 
-    override fun getSelectableItemCount() = dirs.size
+    override fun getSelectableItemCount() = 0
 
-    override fun getIsItemSelectable(position: Int) = true
+    override fun getIsItemSelectable(position: Int) = false
 
     override fun getItemSelectionKey(position: Int) = dirs.getOrNull(position)?.path?.hashCode()
 
@@ -752,7 +753,7 @@ class DirectoryAdapter(
     private fun setupView(view: View, directory: Directory, holder: ViewHolder) {
         val isSelected = selectedKeys.contains(directory.path.hashCode())
         view.apply {
-            dir_path?.text = "${directory.path.substringBeforeLast("/")}/"
+            dir_path?.text = directory.path
             val thumbnailType = when {
                 directory.tmb.isVideoFast() -> TYPE_VIDEOS
                 directory.tmb.isGif() -> TYPE_GIFS

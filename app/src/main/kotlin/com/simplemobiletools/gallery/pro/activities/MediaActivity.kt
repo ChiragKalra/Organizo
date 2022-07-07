@@ -233,22 +233,9 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
         val isDefaultFolder = !config.defaultFolder.isEmpty() && File(config.defaultFolder).compareTo(File(mPath)) == 0
 
         menu.apply {
-            findItem(R.id.group).isVisible = !config.scrollHorizontally
-
-            findItem(R.id.empty_recycle_bin).isVisible = mPath == RECYCLE_BIN
-            findItem(R.id.empty_disable_recycle_bin).isVisible = mPath == RECYCLE_BIN
-            findItem(R.id.restore_all_files).isVisible = mPath == RECYCLE_BIN
-
-            findItem(R.id.folder_view).isVisible = mShowAll
-            findItem(R.id.open_camera).isVisible = mShowAll
-            findItem(R.id.about).isVisible = mShowAll
-            findItem(R.id.create_new_folder).isVisible = !mShowAll && mPath != RECYCLE_BIN && mPath != FAVORITES
 
             findItem(R.id.temporarily_show_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && !config.shouldShowHidden
             findItem(R.id.stop_showing_hidden).isVisible = (!isRPlus() || isExternalStorageManager()) && config.temporarilyShowHidden
-
-            findItem(R.id.set_as_default_folder).isVisible = !isDefaultFolder
-            findItem(R.id.unset_as_default_folder).isVisible = isDefaultFolder
 
             val viewType = config.getFolderViewType(if (mShowAll) SHOW_ALL else mPath)
             findItem(R.id.increase_column_count).isVisible = viewType == VIEW_TYPE_GRID && config.mediaColumnCnt < MAX_COLUMN_COUNT
@@ -264,25 +251,13 @@ class MediaActivity : SimpleActivity(), MediaOperationsListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sort -> showSortingDialog()
-            R.id.filter -> showFilterMediaDialog()
-            R.id.empty_recycle_bin -> emptyRecycleBin()
-            R.id.empty_disable_recycle_bin -> emptyAndDisableRecycleBin()
-            R.id.restore_all_files -> restoreAllFiles()
             R.id.toggle_filename -> toggleFilenameVisibility()
-            R.id.open_camera -> launchCamera()
-            R.id.folder_view -> switchToFolderView()
             R.id.change_view_type -> changeViewType()
-            R.id.group -> showGroupByDialog()
-            R.id.create_new_folder -> createNewFolder()
             R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
             R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
             R.id.increase_column_count -> increaseColumnCount()
             R.id.reduce_column_count -> reduceColumnCount()
-            R.id.set_as_default_folder -> setAsDefaultFolder()
-            R.id.unset_as_default_folder -> unsetAsDefaultFolder()
-            R.id.slideshow -> startSlideshow()
             R.id.settings -> launchSettings()
-            R.id.about -> launchAbout()
             else -> return super.onOptionsItemSelected(item)
         }
         return true

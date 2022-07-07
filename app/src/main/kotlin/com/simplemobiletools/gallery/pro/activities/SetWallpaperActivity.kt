@@ -159,6 +159,7 @@ class SetWallpaperActivity : SimpleActivity(), CropImageView.OnCropImageComplete
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         if (requestCode == PICK_IMAGE) {
             if (resultCode == Activity.RESULT_OK && resultData != null) {

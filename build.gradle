@@ -4,7 +4,7 @@ buildscript {
     // needed only if we are including commons locally from our pc, not via Jitpack
     /*ext {
         propCompileSdkVersion = 31
-        propMinSdkVersion = 21
+        propMinSdkVersion = 26
         propTargetSdkVersion = propCompileSdkVersion
         propVersionCode = 1
         propVersionName = '5.34.26'
@@ -23,7 +23,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
         if (is_proprietary) {
             classpath 'ly.img.android.pesdk:plugin:10.0.1'
         }

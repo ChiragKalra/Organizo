@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.simplemobiletools.gallery.pro"
-        minSdk 21
+        minSdk 26
         targetSdk 31
         versionCode 371
         versionName "6.23.12"
@@ -98,12 +98,18 @@ dependencies {
     implementation('com.squareup.picasso:picasso:2.71828') {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
+    implementation project(path: ':cv')
+    implementation 'androidx.lifecycle:lifecycle-service:2.4.1'
     compileOnly 'com.squareup.okhttp3:okhttp:4.9.0'
 
     kapt 'com.github.bumptech.glide:compiler:4.13.2'
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.room:room-runtime:2.4.2'
+    implementation 'androidx.room:room-ktx:2.4.2'
     annotationProcessor 'androidx.room:room-compiler:2.4.2'
 
     //implementation project(':commons')

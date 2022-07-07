@@ -12,6 +12,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.provider.MediaStore.Images
 import android.provider.MediaStore.Video
@@ -31,7 +32,7 @@ class NewPhotoFetcher : JobService() {
         private val VIDEO_PATH_SEGMENTS = Video.Media.EXTERNAL_CONTENT_URI.pathSegments
     }
 
-    private val mHandler = Handler()
+    private val mHandler = Handler(Looper.getMainLooper())
     private val mWorker = Runnable {
         scheduleJob(this@NewPhotoFetcher)
         jobFinished(mRunningParams, false)

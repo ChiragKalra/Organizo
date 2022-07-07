@@ -3,14 +3,35 @@ package com.simplemobiletools.gallery.pro.interfaces
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy.ABORT
 import androidx.room.Query
+import com.bruhascended.cv.ImageCategory
+import com.bruhascended.cv.Predictions
 import com.simplemobiletools.gallery.pro.models.Medium
 
 @Dao
 interface MediumDao {
-    @Query("SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id FROM media WHERE deleted_ts = 0 AND parent_path = :path COLLATE NOCASE")
+    @Query("""
+        SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id
+        FROM media 
+        WHERE deleted_ts = 0 AND parent_path = :path COLLATE NOCASE
+    """)
     fun getMediaFromPath(path: String): List<Medium>
+
+    @Query("""
+        SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id
+        FROM media 
+        WHERE deleted_ts = 0 AND category = :category AND category_confidence >= :threshold
+    """)
+    fun getMediaFromCategory(category: ImageCategory, threshold: Float): List<Medium>
+
+    @Query("""
+        SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id,
+        category, category_confidence, processing_start, predictions
+        FROM media 
+        WHERE deleted_ts = 0 AND parent_path = :path COLLATE NOCASE
+    """)
+    fun getMediaFromPathWithPredictions(path: String): List<Medium>
 
     @Query("SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id FROM media WHERE deleted_ts = 0 AND is_favorite = 1")
     fun getFavorites(): List<Medium>
@@ -27,10 +48,10 @@ interface MediumDao {
     @Query("SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id FROM media WHERE deleted_ts < :timestmap AND deleted_ts != 0")
     fun getOldRecycleBinItems(timestmap: Long): List<Medium>
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = ABORT)
     fun insert(medium: Medium)
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = ABORT)
     fun insertAll(media: List<Medium>)
 
     @Delete
@@ -38,6 +59,12 @@ interface MediumDao {
 
     @Query("DELETE FROM media WHERE full_path = :path COLLATE NOCASE")
     fun deleteMediumPath(path: String)
+
+    @Query("UPDATE OR REPLACE media SET predictions = :predictions, category = :category, category_confidence = :confidence WHERE full_path = :path COLLATE NOCASE")
+    fun updateMediumPredictions(path: String, predictions: Predictions, category: ImageCategory, confidence: Float)
+
+    @Query("UPDATE OR REPLACE media SET processing_start = :time WHERE full_path = :path COLLATE NOCASE")
+    fun updateMediumProcessStart(path: String, time: Long)
 
     @Query("UPDATE OR REPLACE media SET filename = :newFilename, full_path = :newFullPath, parent_path = :newParentPath WHERE full_path = :oldPath COLLATE NOCASE")
     fun updateMedium(newFilename: String, newFullPath: String, newParentPath: String, oldPath: String)

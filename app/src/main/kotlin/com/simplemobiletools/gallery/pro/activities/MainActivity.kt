@@ -41,6 +41,7 @@ import com.simplemobiletools.gallery.pro.interfaces.DirectoryOperationsListener
 import com.simplemobiletools.gallery.pro.jobs.NewPhotoFetcher
 import com.simplemobiletools.gallery.pro.models.Directory
 import com.simplemobiletools.gallery.pro.models.Medium
+import com.simplemobiletools.gallery.pro.services.FeatureExtractorService
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 
@@ -97,6 +98,7 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             removeTempFolder()
             checkRecycleBinItems()
             startNewPhotoFetcher()
+            startForegroundService(Intent(this, FeatureExtractorService::class.java))
         }
 
         mIsPickImageIntent = isPickImageIntent(intent)
@@ -300,9 +302,6 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
             menu.apply {
                 findItem(R.id.increase_column_count).isVisible = config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt < MAX_COLUMN_COUNT
                 findItem(R.id.reduce_column_count).isVisible = config.viewTypeFolders == VIEW_TYPE_GRID && config.dirColumnCnt > 1
-                findItem(R.id.hide_the_recycle_bin).isVisible = useBin && config.showRecycleBinAtFolders
-                findItem(R.id.show_the_recycle_bin).isVisible = useBin && !config.showRecycleBinAtFolders
-                findItem(R.id.set_as_default_folder).isVisible = !config.defaultFolder.isEmpty()
                 setupSearch(this)
             }
         }
@@ -320,22 +319,14 @@ class MainActivity : SimpleActivity(), DirectoryOperationsListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sort -> showSortingDialog()
-            R.id.filter -> showFilterMediaDialog()
-            R.id.open_camera -> launchCamera()
-            R.id.show_all -> showAllMedia()
             R.id.change_view_type -> changeViewType()
             R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
             R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
             R.id.temporarily_show_excluded -> tryToggleTemporarilyShowExcluded()
             R.id.stop_showing_excluded -> tryToggleTemporarilyShowExcluded()
-            R.id.create_new_folder -> createNewFolder()
-            R.id.show_the_recycle_bin -> toggleRecycleBin(true)
-            R.id.hide_the_recycle_bin -> toggleRecycleBin(false)
             R.id.increase_column_count -> increaseColumnCount()
             R.id.reduce_column_count -> reduceColumnCount()
-            R.id.set_as_default_folder -> setAsDefaultFolder()
             R.id.settings -> launchSettings()
-            R.id.about -> launchAbout()
             else -> return super.onOptionsItemSelected(item)
         }
         return true

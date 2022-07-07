@@ -58,6 +58,8 @@ val Context.mediaDB: MediumDao get() = GalleryDatabase.getInstance(applicationCo
 
 val Context.directoryDao: DirectoryDao get() = GalleryDatabase.getInstance(applicationContext).DirectoryDao()
 
+val Context.categoryDao: CategoryDao get() = GalleryDatabase.getInstance(applicationContext).CategoryDao()
+
 val Context.favoritesDB: FavoritesDao get() = GalleryDatabase.getInstance(applicationContext).FavoritesDao()
 
 val Context.dateTakensDB: DateTakensDao get() = GalleryDatabase.getInstance(applicationContext).DateTakensDao()
@@ -1010,7 +1012,7 @@ fun Context.createDirectoryFromMedia(
     }
 
     val isSortingAscending = config.directorySorting.isSortingAscending()
-    val defaultMedium = Medium(0, "", "", "", 0L, 0L, 0L, 0, 0, false, 0L, 0L)
+    val defaultMedium = Medium()
     val firstItem = curMedia.firstOrNull() ?: defaultMedium
     val lastItem = curMedia.lastOrNull() ?: defaultMedium
     val dirName = checkAppendingHidden(path, hiddenString, includedFolders, noMediaFolders)

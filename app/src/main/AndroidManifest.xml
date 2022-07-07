@@ -10,6 +10,9 @@
         android:maxSdkVersion="40"
         tools:replace="android:maxSdkVersion" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
@@ -41,6 +44,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
+
+        <service
+            android:name=".services.FeatureExtractorService"
+            android:enabled="true"
+            android:exported="false" />
 
         <activity
             android:name=".activities.SplashActivity"
@@ -84,7 +92,58 @@
         </activity>
 
         <activity
+            android:name=".activities.CategoryActivity"
+            android:exported="true"
+            android:resizeableActivity="true">
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="vnd.android.cursor.dir/image" />
+                <data android:mimeType="vnd.android.cursor.dir/video" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.OPENABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="vnd.android.cursor.dir/image" />
+                <data android:mimeType="vnd.android.cursor.dir/video" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".activities.MediaActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity">
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:resource="@xml/searchable" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".activities.MediaCategoryActivity"
             android:exported="false"
             android:parentActivityName=".activities.MainActivity">
 

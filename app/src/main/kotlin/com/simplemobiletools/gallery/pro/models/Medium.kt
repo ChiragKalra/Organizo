@@ -2,6 +2,8 @@ package com.simplemobiletools.gallery.pro.models
 
 import android.content.Context
 import androidx.room.*
+import com.bruhascended.cv.ImageCategory
+import com.bruhascended.cv.Predictions
 import com.bumptech.glide.signature.ObjectKey
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.SORT_BY_DATE_MODIFIED
@@ -16,9 +18,9 @@ import java.util.*
 
 @Entity(tableName = "media", indices = [(Index(value = ["full_path"], unique = true))])
 data class Medium(
-    @PrimaryKey(autoGenerate = true) var id: Long?,
+    @Ignore var id: Long?,
     @ColumnInfo(name = "filename") var name: String,
-    @ColumnInfo(name = "full_path") var path: String,
+    @PrimaryKey @ColumnInfo(name = "full_path") var path: String,
     @ColumnInfo(name = "parent_path") var parentPath: String,
     @ColumnInfo(name = "last_modified") var modified: Long,
     @ColumnInfo(name = "date_taken") var taken: Long,
@@ -29,14 +31,23 @@ data class Medium(
     @ColumnInfo(name = "deleted_ts") var deletedTS: Long,
     @ColumnInfo(name = "media_store_id") var mediaStoreId: Long,
 
-    @Ignore var gridPosition: Int = 0   // used at grid view decoration at Grouping enabled
+    @ColumnInfo(name = "category", ) var category: ImageCategory? = ImageCategory.Other,
+    @ColumnInfo(name = "category_confidence", ) var categoryConfidence: Float? = 1f,
+    @ColumnInfo(name = "processing_start") var processingStartMs: Long? = null,
+    @ColumnInfo(name = "predictions") var predictions: Predictions? = null,
+
+    @Ignore var gridPosition: Int = 0,   // used at grid view decoration at Grouping enabled
 ) : Serializable, ThumbnailItem() {
 
-    constructor() : this(null, "", "", "", 0L, 0L, 0L, 0, 0, false, 0L, 0L, 0)
+    constructor() :
+        this(null, "", "", "", 0L, 0L, 0L, 0, 0, false, 0L, 0L)
 
     companion object {
         private const val serialVersionUID = -6553149366975655L
     }
+
+    val isQueuedForProcessing: Boolean
+        get() = isImage() && predictions == null && Calendar.getInstance().timeInMillis - (processingStartMs ?: 0) > 500
 
     fun isWebP() = name.isWebP()
 
@@ -73,8 +84,9 @@ data class Medium(
             groupBy and GROUP_BY_DATE_TAKEN_DAILY != 0 -> getDayStartTS(taken, false)
             groupBy and GROUP_BY_DATE_TAKEN_MONTHLY != 0 -> getDayStartTS(taken, true)
             groupBy and GROUP_BY_FILE_TYPE != 0 -> type.toString()
-            groupBy and GROUP_BY_EXTENSION != 0 -> name.getFilenameExtension().toLowerCase()
+            groupBy and GROUP_BY_EXTENSION != 0 -> name.getFilenameExtension().lowercase(Locale.ROOT)
             groupBy and GROUP_BY_FOLDER != 0 -> parentPath
+            groupBy and GROUP_BY_CATEGORY != 0 -> category?.name ?: ImageCategory.Other.name
             else -> ""
         }
     }

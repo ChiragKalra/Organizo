@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Simple Gallery</string>
-    <string name="app_launcher_name">Gallery</string>
+
+    <string name="x_mins_remaining" translatable="false">%1$d minutes remaining</string>
+    <string name="x_percent" translatable="false">%1$d%%</string>
+    <string name="less_than_min_remaining" translatable="false">About a minute remaining</string>
+    <string name="just_few_secs" translatable="false">Just a few more seconds</string>
+    <string name="finishing_up" translatable="false">Finishing Up</string>
+    <string name="organising_your_gallery" translatable="false">Organizing Your Gallery!</string>
+
+    <string name="app_name">Organizo</string>
+    <string name="app_launcher_name">Organizo</string>
     <string name="edit">Edit</string>
     <string name="open_camera">Open camera</string>
     <string name="hidden">(hidden)</string>
@@ -379,7 +387,7 @@
 
     <!-- Strings displayed only on Google Playstore. Optional, but good to have -->
     <!-- App title has to have less than 50 characters. If you cannot squeeze it, just remove a part of it -->
-    <string name="app_title">Simple Gallery Pro - Photo Manager &amp; Editor</string>
+    <string name="app_title">Organizo</string>
     <!-- Short description has to have less than 80 chars -->
     <string name="app_short_description">A premium app for managing and editing your photos, videos, GIFs without ads</string>
     <string name="app_long_description">
