@@ -3,11 +3,13 @@ package com.simplemobiletools.gallery.pro.services
 import android.content.Context
 import androidx.work.*
 import com.bruhascended.cv.ImageCategory
+import com.simplemobiletools.gallery.pro.extensions.config
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 class CleanupManager(mContext: Context) {
     private val mWorkManager = WorkManager.getInstance(mContext)
+    private val config = mContext.config
 
     fun schedule(imageCategory: ImageCategory, duration: Duration) {
         val constraints = Constraints.Builder()
@@ -29,6 +31,14 @@ class CleanupManager(mContext: Context) {
             ExistingPeriodicWorkPolicy.REPLACE,
             request
         )
+
+        config.setCategoryDeletionAge(imageCategory, duration)
+    }
+
+    fun getDuration(imageCategory: ImageCategory) = config.getCategoryDeletionAge(imageCategory)
+
+    fun cancel(imageCategory: ImageCategory) {
+        mWorkManager.cancelUniqueWork(imageCategory.fullName)
     }
 
     companion object {
@@ -36,6 +46,7 @@ class CleanupManager(mContext: Context) {
         const val DURATION_ID = "DURATION_ID"
 
         enum class Duration (val timeInMs: Long, val fullName: String) {
+            Never(20 * 365 * 24 * 60 * 60 * 1000L, "Never"),
             Day(24 * 60 * 60 * 1000L, "One Day"),
             Week(7 * 24 * 60 * 60 * 1000L, "One Week"),
             Month(30 * 24 * 60 * 60 * 1000L, "One Month"),

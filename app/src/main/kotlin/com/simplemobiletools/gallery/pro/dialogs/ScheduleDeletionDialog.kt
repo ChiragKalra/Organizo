@@ -11,8 +11,9 @@ import com.simplemobiletools.gallery.pro.services.CleanupManager.Companion.Durat
 class ScheduleDeletionDialog(
     private val activity: BaseSimpleActivity, private val imageCategory: ImageCategory
 ) {
+    private val manager = CleanupManager(activity)
     fun show() {
-        var selection = 0
+        var selection = manager.getDuration(imageCategory).ordinal
         activity.toast("Note: All files permission must be granted for this feature to work.")
         AlertDialog.Builder(activity)
             .setTitle("Schedule automatic deletion for images older than:")
@@ -20,10 +21,11 @@ class ScheduleDeletionDialog(
                 selection = select
             }
             .setPositiveButton(R.string.ok) { dialog, _ ->
-                CleanupManager(activity).schedule(imageCategory, Duration.values()[selection])
+                manager.schedule(imageCategory, Duration.values()[selection])
                 dialog.dismiss()
             }
             .setNegativeButton(R.string.cancel) { dialog, _ ->
+                manager.cancel(imageCategory)
                 dialog.dismiss()
             }
             .create()

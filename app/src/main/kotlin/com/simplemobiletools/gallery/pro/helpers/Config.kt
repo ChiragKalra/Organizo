@@ -3,16 +3,26 @@ package com.simplemobiletools.gallery.pro.helpers
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Environment
+import com.bruhascended.cv.ImageCategory
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.gallery.pro.R
 import com.simplemobiletools.gallery.pro.models.AlbumCover
+import com.simplemobiletools.gallery.pro.services.CleanupManager
 import java.util.*
 
 class Config(context: Context) : BaseConfig(context) {
     companion object {
         fun newInstance(context: Context) = Config(context)
+    }
+
+    fun getCategoryDeletionAge(imageCategory: ImageCategory): CleanupManager.Companion.Duration {
+        return CleanupManager.Companion.Duration.values()[prefs.getInt("SCHEDULED_DELETION_${imageCategory.name}", 0)]
+    }
+
+    fun setCategoryDeletionAge(imageCategory: ImageCategory, duration: CleanupManager.Companion.Duration) {
+        prefs.edit().putInt("SCHEDULED_DELETION_${imageCategory.name}", duration.ordinal).apply()
     }
 
     var imageCategoryThreshold: Float
