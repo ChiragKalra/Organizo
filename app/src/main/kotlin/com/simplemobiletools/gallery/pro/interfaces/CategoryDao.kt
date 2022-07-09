@@ -12,7 +12,8 @@ interface CategoryDao {
     @Query("SELECT * FROM categories")
     fun getAll(): List<CategoryEntry>
 
-    @Query("SELECT * FROM categories WHERE image_category != :category AND media_count > 0")
+    @Query("SELECT * FROM categories WHERE image_category != :category AND media_count > 0 " +
+        "ORDER BY size DESC")
     fun getAllExceptOther(category: ImageCategory = ImageCategory.Other): List<CategoryEntry>
 
     @Insert(onConflict = REPLACE)

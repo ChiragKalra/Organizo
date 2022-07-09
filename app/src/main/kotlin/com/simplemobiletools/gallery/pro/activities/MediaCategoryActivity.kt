@@ -236,7 +236,6 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.sort -> showSortingDialog()
             R.id.toggle_filename -> toggleFilenameVisibility()
             R.id.change_view_type -> changeViewType()
             R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()

@@ -51,7 +51,9 @@ import kotlinx.android.synthetic.main.directory_item_list.view.dir_drag_handle
 import kotlinx.android.synthetic.main.directory_item_list.view.dir_holder
 import kotlinx.android.synthetic.main.directory_item_list.view.photo_cnt
 import java.io.File
+import java.lang.Math.pow
 import java.util.*
+import kotlin.math.pow
 
 class DirectoryAdapter(
     activity: BaseSimpleActivity, var dirs: ArrayList<Directory>, val listener: DirectoryOperationsListener?, recyclerView: MyRecyclerView,
@@ -840,6 +842,7 @@ class DirectoryAdapter(
             }
 
             dir_name.text = nameCount
+            dir_size.text = directory.size.toUserReadableSize()
 
             if (isListViewType || folderStyle == FOLDER_STYLE_ROUNDED_CORNERS) {
                 photo_cnt.setTextColor(textColor)
@@ -866,6 +869,17 @@ class DirectoryAdapter(
                 }
             }
         }
+    }
+
+    private fun Long.toUserReadableSize(): String {
+        val len = toString().length - 1
+        val sizes = arrayOf("B", "KB", "MB", "GB")
+        val yeah = (this/10.0.pow((len - (len % 3)).toDouble()))
+        return "Taking up " + when(len % 3) {
+            0 -> "%.2f".format(yeah)
+            1 -> "%.1f".format(yeah)
+            else -> yeah.toInt().toString()
+        } + " ${sizes[len/3]}"
     }
 
     override fun onRowMoved(fromPosition: Int, toPosition: Int) {

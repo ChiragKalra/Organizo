@@ -24,7 +24,6 @@
         android:layout_alignTop="@+id/dir_thumbnail"
         android:layout_alignEnd="@+id/dir_thumbnail"
         android:layout_alignBottom="@+id/dir_thumbnail"
-        android:layout_centerInParent="true"
         android:background="@color/default_background_color"
         android:contentDescription="@string/lock_folder"
         android:padding="@dimen/medium_margin"
@@ -55,6 +54,19 @@
         android:paddingStart="@dimen/medium_margin"
         android:paddingEnd="@dimen/medium_margin"
         android:textColor="@android:color/white"
+        android:textSize="@dimen/bigger_text_size" />
+
+    <TextView
+        android:id="@+id/dir_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/dir_thumbnail"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="@dimen/medium_margin"
+        android:paddingEnd="@dimen/medium_margin"
+        android:textColor="#f88"
         android:textSize="@dimen/bigger_text_size" />
 
     <TextView

@@ -35,15 +35,6 @@ class ChangeViewTypeDialog(val activity: BaseSimpleActivity, val fromFoldersView
             }
 
             change_view_type_dialog_radio.check(viewToCheck)
-            change_view_type_dialog_group_direct_subfolders.apply {
-                beVisibleIf(fromFoldersView)
-                isChecked = config.groupDirectSubfolders
-            }
-
-            change_view_type_dialog_use_for_this_folder.apply {
-                beVisibleIf(!fromFoldersView)
-                isChecked = config.hasCustomViewType(pathToUse)
-            }
         }
 
         AlertDialog.Builder(activity)
@@ -63,14 +54,10 @@ class ChangeViewTypeDialog(val activity: BaseSimpleActivity, val fromFoldersView
 
         if (fromFoldersView) {
             config.viewTypeFolders = viewType
-            config.groupDirectSubfolders = view.change_view_type_dialog_group_direct_subfolders.isChecked
         } else {
-            if (view.change_view_type_dialog_use_for_this_folder.isChecked) {
-                config.saveFolderViewType(pathToUse, viewType)
-            } else {
-                config.removeFolderViewType(pathToUse)
-                config.viewTypeFiles = viewType
-            }
+            config.removeFolderViewType(pathToUse)
+            config.viewTypeFiles = viewType
+
         }
 
 

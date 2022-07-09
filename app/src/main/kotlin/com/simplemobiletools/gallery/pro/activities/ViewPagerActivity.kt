@@ -459,16 +459,16 @@ class ViewPagerActivity : SimpleActivity(), ViewPager.OnPageChangeListener, View
     }
 
     private fun updatePagerItems(media: MutableList<Medium>) {
-        val pagerAdapter = MyPagerAdapter(this, supportFragmentManager, media)
+        val pagerAdapter = MyPagerAdapter(this, supportFragmentManager, mutableListOf(media[mPos]))
         if (!isDestroyed) {
-            pagerAdapter.shouldInitFragment = mPos < 5
+            pagerAdapter.shouldInitFragment = true
             view_pager.apply {
                 // must remove the listener before changing adapter, otherwise it might cause `mPos` to be set to 0
                 removeOnPageChangeListener(this@ViewPagerActivity)
                 adapter = pagerAdapter
                 pagerAdapter.shouldInitFragment = true
                 addOnPageChangeListener(this@ViewPagerActivity)
-                currentItem = mPos
+                currentItem = 0
             }
         }
     }

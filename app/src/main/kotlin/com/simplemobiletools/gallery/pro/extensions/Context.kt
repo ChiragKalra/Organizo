@@ -12,6 +12,7 @@ import android.os.Process
 import android.provider.MediaStore.Files
 import android.provider.MediaStore.Images
 import android.widget.ImageView
+import com.bruhascended.cv.ImageCategory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
@@ -880,6 +881,12 @@ fun Context.getUpdatedDeletedMedia(): ArrayList<Medium> {
 }
 
 fun Context.deleteDBPath(path: String) {
+    mediaDB.getMedium(path).apply {
+        if (this == null) return
+        if ((categoryConfidence ?: 0f) >= config.imageCategoryThreshold) {
+            categoryDao.addToSizeOfCategory(category ?: ImageCategory.Other, -size, -1)
+        }
+    }
     deleteMediumWithPath(path.replaceFirst(recycleBinPath, RECYCLE_BIN))
 }
 

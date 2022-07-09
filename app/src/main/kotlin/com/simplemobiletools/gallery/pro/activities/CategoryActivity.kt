@@ -112,6 +112,7 @@ class CategoryActivity : SimpleActivity(), DirectoryOperationsListener {
             mIsGetAnyContentIntent || mIsSetWallpaperIntent
 
         directories_refresh_layout.setOnRefreshListener { getDirectories() }
+        getDirectories()
         storeStateVariables()
         checkWhatsNewDialog()
 
@@ -309,7 +310,6 @@ class CategoryActivity : SimpleActivity(), DirectoryOperationsListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.sort -> showSortingDialog()
             R.id.change_view_type -> changeViewType()
             R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
             R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()

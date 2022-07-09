@@ -209,7 +209,7 @@ class Config(context: Context) : BaseConfig(context) {
         set(openVideosOnSeparateScreen) = prefs.edit().putBoolean(OPEN_VIDEOS_ON_SEPARATE_SCREEN, openVideosOnSeparateScreen).apply()
 
     var displayFileNames: Boolean
-        get() = prefs.getBoolean(DISPLAY_FILE_NAMES, false)
+        get() = prefs.getBoolean(DISPLAY_FILE_NAMES, true)
         set(display) = prefs.edit().putBoolean(DISPLAY_FILE_NAMES, display).apply()
 
     var blackBackground: Boolean
@@ -382,7 +382,7 @@ class Config(context: Context) : BaseConfig(context) {
         set(groupBy) = prefs.edit().putInt(GROUP_BY, groupBy).apply()
 
     var useRecycleBin: Boolean
-        get() = prefs.getBoolean(USE_RECYCLE_BIN, true)
+        get() = prefs.getBoolean(USE_RECYCLE_BIN, false)
         set(useRecycleBin) = prefs.edit().putBoolean(USE_RECYCLE_BIN, useRecycleBin).apply()
 
     var bottomActions: Boolean

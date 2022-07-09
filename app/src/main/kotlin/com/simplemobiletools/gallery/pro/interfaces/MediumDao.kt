@@ -15,13 +15,23 @@ interface MediumDao {
         SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id
         FROM media 
         WHERE deleted_ts = 0 AND parent_path = :path COLLATE NOCASE
+        ORDER BY size DESC
     """)
     fun getMediaFromPath(path: String): List<Medium>
+
+    @Query("""
+        SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id,
+        category, category_confidence, processing_start, predictions
+        FROM media 
+        WHERE full_path = :fullPath COLLATE NOCASE
+    """)
+    fun getMedium(fullPath: String): Medium?
 
     @Query("""
         SELECT filename, full_path, parent_path, last_modified, date_taken, size, type, video_duration, is_favorite, deleted_ts, media_store_id
         FROM media 
         WHERE deleted_ts = 0 AND category = :category AND category_confidence >= :threshold
+        ORDER BY size DESC
     """)
     fun getMediaFromCategory(category: ImageCategory, threshold: Float): List<Medium>
 
@@ -30,6 +40,7 @@ interface MediumDao {
         category, category_confidence, processing_start, predictions
         FROM media 
         WHERE deleted_ts = 0 AND parent_path = :path COLLATE NOCASE
+        ORDER BY size DESC
     """)
     fun getMediaFromPathWithPredictions(path: String): List<Medium>
 
