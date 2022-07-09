@@ -3,10 +3,10 @@
 
     <string name="x_mins_remaining" translatable="false">%1$d minutes remaining</string>
     <string name="x_percent" translatable="false">%1$d%%</string>
-    <string name="less_than_min_remaining" translatable="false">About a minute remaining</string>
-    <string name="just_few_secs" translatable="false">Just a few more seconds</string>
-    <string name="finishing_up" translatable="false">Finishing Up</string>
-    <string name="organising_your_gallery" translatable="false">Organizing Your Gallery!</string>
+    <string name="less_than_min_remaining" translatable="false">About a minute remaining.</string>
+    <string name="just_few_secs" translatable="false">Just a few more seconds.</string>
+    <string name="finishing_up" translatable="false">Finishing Up.</string>
+    <string name="organising_your_gallery" translatable="false">Organizing your gallery.</string>
 
     <string name="app_name">Organizo</string>
     <string name="app_launcher_name">Organizo</string>

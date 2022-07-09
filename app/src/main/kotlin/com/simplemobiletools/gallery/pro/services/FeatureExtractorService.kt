@@ -114,8 +114,7 @@ class FeatureExtractorService: LifecycleService() {
             }
         } else ""
         return Notification.Builder(this, applicationContext.packageName)
-            .setContentTitle(getText(R.string.organising_your_gallery))
-            .setContentText(etaStr)
+            .setContentTitle(getString(R.string.organising_your_gallery) + etaStr)
             .setSmallIcon(R.mipmap.ic_app_launcher)
             .setContentIntent(pendingIntent)
             .setTicker(getText(R.string.organising_your_gallery))
