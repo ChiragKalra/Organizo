@@ -27,10 +27,7 @@ import com.simplemobiletools.commons.views.MyRecyclerView
 import com.simplemobiletools.gallery.pro.R
 import com.simplemobiletools.gallery.pro.adapters.MediaAdapter
 import com.simplemobiletools.gallery.pro.databases.GalleryDatabase
-import com.simplemobiletools.gallery.pro.dialogs.ChangeGroupingDialog
-import com.simplemobiletools.gallery.pro.dialogs.ChangeSortingDialog
-import com.simplemobiletools.gallery.pro.dialogs.ChangeViewTypeDialog
-import com.simplemobiletools.gallery.pro.dialogs.FilterMediaDialog
+import com.simplemobiletools.gallery.pro.dialogs.*
 import com.simplemobiletools.gallery.pro.extensions.*
 import com.simplemobiletools.gallery.pro.helpers.*
 import com.simplemobiletools.gallery.pro.interfaces.MediaOperationsListener
@@ -238,15 +235,15 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
         when (item.itemId) {
             R.id.toggle_filename -> toggleFilenameVisibility()
             R.id.change_view_type -> changeViewType()
-            R.id.temporarily_show_hidden -> tryToggleTemporarilyShowHidden()
-            R.id.stop_showing_hidden -> tryToggleTemporarilyShowHidden()
             R.id.increase_column_count -> increaseColumnCount()
             R.id.reduce_column_count -> reduceColumnCount()
-            R.id.settings -> launchSettings()
+            R.id.schedule_deletion -> scheduleDeletion()
             else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
+
+
 
     private fun storeStateVariables() {
         mStoredTextColor = getProperTextColor()
@@ -430,6 +427,10 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
             media_grid.adapter = null
             setupAdapter()
         }
+    }
+
+    private fun scheduleDeletion() {
+        ScheduleDeletionDialog(this, mCategory).show()
     }
 
     private fun showGroupByDialog() {

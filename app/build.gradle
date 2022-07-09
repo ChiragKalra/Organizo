@@ -99,8 +99,8 @@ dependencies {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
     implementation project(path: ':cv')
-    implementation 'androidx.lifecycle:lifecycle-service:2.4.1'
-    implementation 'androidx.work:work-runtime-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.5.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
     compileOnly 'com.squareup.okhttp3:okhttp:4.9.0'
 
     kapt 'com.github.bumptech.glide:compiler:4.13.2'

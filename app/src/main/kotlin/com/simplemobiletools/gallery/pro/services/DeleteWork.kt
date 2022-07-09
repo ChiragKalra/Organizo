@@ -30,7 +30,7 @@ class DeleteWork(
 
         val totalSize = expired.sumOf { it.size }
         mContext.categoryDao.addToSizeOfCategory(category, -totalSize, -expired.size)
-
+        expired.forEach { mContext.mediaDB.deleteMediumPath(it.path) }
         mContext.deleteFiles(expired.map { it.toFileDirItem() })
 
         return Result.success()

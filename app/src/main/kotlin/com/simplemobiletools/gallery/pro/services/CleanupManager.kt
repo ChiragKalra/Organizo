@@ -35,13 +35,13 @@ class CleanupManager(mContext: Context) {
         const val IMAGE_CATEGORY_ID = "IMAGE_CATEGORY_ID"
         const val DURATION_ID = "DURATION_ID"
 
-        enum class Duration (val timeInMs: Long) {
-            Day(24 * 60 * 60 * 1000L),
-            Week(7 * 24 * 60 * 60 * 1000L),
-            Month(30 * 24 * 60 * 60 * 1000L),
-            Quarter(3 * 30 * 24 * 60 * 60 * 1000L),
-            HalfYear(6 * 30 * 24 * 60 * 60 * 1000L),
-            Year(365 * 24 * 60 * 60 * 1000L);
+        enum class Duration (val timeInMs: Long, val fullName: String) {
+            Day(24 * 60 * 60 * 1000L, "One Day"),
+            Week(7 * 24 * 60 * 60 * 1000L, "One Week"),
+            Month(30 * 24 * 60 * 60 * 1000L, "One Month"),
+            Quarter(3 * 30 * 24 * 60 * 60 * 1000L, "Three Months"),
+            HalfYear(6 * 30 * 24 * 60 * 60 * 1000L, "Six Months"),
+            Year(365 * 24 * 60 * 60 * 1000L, "One Year");
 
             fun isWithin(context: Context, timeInMs: Long) = getTimeRn(context) - timeInMs <= this.timeInMs
 
