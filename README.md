@@ -4,7 +4,7 @@
 Organizo helps you clean up your gallery and organise it.
 
 ## Usage
-App is in development. Beta version will be released soon.
+First release is available in releases.
 
 ## Related Projects
 * Code used to generate the tensorflow model at it's core : https://github.com/ChiragKalra/OrganizoCV
