@@ -176,6 +176,11 @@ class MediaAdapter(
         }
     }
 
+    fun selectAllMedia() {
+        activity.startActionMode(super.actModeCallback)
+        super.selectAll()
+    }
+
     override fun getSelectableItemCount() = media.filter { it is Medium }.size
 
     override fun getIsItemSelectable(position: Int) = !isASectionTitle(position)
@@ -418,16 +423,7 @@ class MediaAdapter(
         }
     }
 
-    private fun fixDateTaken() {
-        ensureBackgroundThread {
-            activity.fixDateTaken(getSelectedPaths(), true) {
-                listener?.refreshItems()
-                finishActMode()
-            }
-        }
-    }
-
-    private fun checkDeleteConfirmation() {
+    fun checkDeleteConfirmation() {
         activity.handleMediaManagementPrompt {
             if (config.isDeletePasswordProtectionOn) {
                 activity.handleDeletePasswordProtection {

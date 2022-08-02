@@ -26,7 +26,7 @@ class Config(context: Context) : BaseConfig(context) {
     }
 
     var imageCategoryThreshold: Float
-        get() = prefs.getFloat(IMAGE_CATEGORY_THRESHOLD, .90f)
+        get() = prefs.getFloat(IMAGE_CATEGORY_THRESHOLD, .9f)
         set(value) = prefs.edit().putFloat(IMAGE_CATEGORY_THRESHOLD, value).apply()
 
     var objectDetectionThreshold: Float
@@ -82,11 +82,11 @@ class Config(context: Context) : BaseConfig(context) {
     var shouldShowHidden = showHiddenMedia || temporarilyShowHidden
 
     var showHiddenMedia: Boolean
-        get() = prefs.getBoolean(SHOW_HIDDEN_MEDIA, false)
+        get() = prefs.getBoolean(SHOW_HIDDEN_MEDIA, true)
         set(showHiddenFolders) = prefs.edit().putBoolean(SHOW_HIDDEN_MEDIA, showHiddenFolders).apply()
 
     var temporarilyShowHidden: Boolean
-        get() = prefs.getBoolean(TEMPORARILY_SHOW_HIDDEN, false)
+        get() = prefs.getBoolean(TEMPORARILY_SHOW_HIDDEN, true)
         set(temporarilyShowHidden) = prefs.edit().putBoolean(TEMPORARILY_SHOW_HIDDEN, temporarilyShowHidden).apply()
 
     var temporarilyShowExcluded: Boolean

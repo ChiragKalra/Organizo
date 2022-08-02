@@ -7,7 +7,7 @@ class RunTimeAnalyzer(
     private val debug: Boolean,
 ) {
     companion object {
-        private const val beta = .8
+        private const val beta = .95
     }
 
     private var v = 0.0

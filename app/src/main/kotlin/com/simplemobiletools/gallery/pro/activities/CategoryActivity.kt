@@ -897,7 +897,7 @@ class CategoryActivity : SimpleActivity(), DirectoryOperationsListener {
         val includedFolders = config.includedFolders
         val noMediaFolders = getNoMediaFoldersSync()
         val tempFolderPath = config.tempFolderPath
-        val getProperFileSize = config.directorySorting and SORT_BY_SIZE != 0
+        val getProperFileSize = true
         val dirPathsToRemove = ArrayList<String>()
         val lastModifieds = mLastMediaFetcher!!.getLastModifieds()
         val dateTakens = mLastMediaFetcher!!.getDateTakens()

@@ -12,6 +12,56 @@
         android:orientation="vertical">
 
         <TextView
+            android:visibility="gone"
+            android:id="@+id/settings_threshold_label"
+            style="@style/SettingsSectionLabelStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detection Confidence" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/settings_threshold_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:background="@drawable/section_holder_stroke"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/settings_category_threshold_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_all_corners">
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/settings_category_threshold_label"
+                    style="@style/SettingsTextLabelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category Confidence" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settings_object_threshold_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ripple_all_corners">
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/settings_object_threshold_label"
+                    style="@style/SettingsTextLabelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Object Confidence" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/settings_color_customization_label"
             style="@style/SettingsSectionLabelStyle"
             android:layout_width="match_parent"
@@ -119,6 +169,7 @@
                 style="@style/SettingsHolderTextViewOneLinerStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/ripple_background">
 
                 <com.simplemobiletools.commons.views.MyTextView
@@ -134,6 +185,7 @@
                 android:id="@+id/settings_manage_excluded_folders_holder"
                 style="@style/SettingsHolderTextViewOneLinerStyle"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ripple_background">
 
@@ -146,134 +198,8 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/settings_manage_hidden_folders_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_manage_hidden_folders"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manage_hidden_folders" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_show_hidden_items_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_bottom_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_show_hidden_items"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_hidden_items" />
-
-            </RelativeLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/settings_videos_label"
-            style="@style/SettingsSectionLabelStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/videos" />
-
-        <LinearLayout
-            android:id="@+id/settings_videos_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_margin"
-            android:background="@drawable/section_holder_stroke"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/settings_autoplay_videos_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_top_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_autoplay_videos"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/autoplay_videos" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_remember_last_video_position_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_remember_last_video_position"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/remember_last_video_position" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_loop_videos_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_loop_videos"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/loop_videos" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_open_videos_on_separate_screen_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_open_videos_on_separate_screen"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/open_videos_on_separate_screen" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_allow_video_gestures_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_bottom_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_allow_video_gestures"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/allow_video_gestures" />
-
-            </RelativeLayout>
-        </LinearLayout>
 
         <TextView
             android:id="@+id/settings_thumbnails_label"
@@ -396,6 +322,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/settings_fullscreen_media_label"
             style="@style/SettingsSectionLabelStyle"
             android:layout_width="match_parent"
@@ -403,6 +330,7 @@
             android:text="@string/fullscreen_media" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/settings_fullscreen_media_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -548,6 +476,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/settings_deep_zoomable_images_label"
             style="@style/SettingsSectionLabelStyle"
             android:layout_width="match_parent"
@@ -555,6 +484,7 @@
             android:text="@string/deep_zoomable_images" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/settings_deep_zoomable_images_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -692,6 +622,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/settings_security_label"
             style="@style/SettingsSectionLabelStyle"
             android:layout_width="match_parent"
@@ -699,6 +630,7 @@
             android:text="@string/security" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/settings_security_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -723,38 +655,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/settings_hidden_item_password_protection_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_hidden_item_password_protection"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/password_protect_hidden_items" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_excluded_item_password_protection_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_excluded_item_password_protection"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/password_protect_excluded" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/settings_file_deletion_password_protection_holder"
                 style="@style/SettingsHolderCheckboxStyle"
                 android:layout_width="match_parent"
@@ -774,6 +675,7 @@
         <TextView
             android:id="@+id/settings_file_operations_label"
             style="@style/SettingsSectionLabelStyle"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/file_operations" />
@@ -783,40 +685,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/medium_margin"
+            android:visibility="gone"
             android:background="@drawable/section_holder_stroke"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/settings_delete_empty_folders_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_top_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_delete_empty_folders"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/delete_empty_folders" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_keep_last_modified_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_keep_last_modified"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/keep_last_modified" />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/settings_skip_delete_confirmation_holder"
@@ -835,141 +707,6 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/settings_bottom_actions_label"
-            style="@style/SettingsSectionLabelStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/bottom_actions" />
-
-        <LinearLayout
-            android:id="@+id/settings_bottom_actions_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_margin"
-            android:background="@drawable/section_holder_stroke"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/settings_bottom_actions_checkbox_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_top_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_bottom_actions_checkbox"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_at_bottom" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_manage_bottom_actions_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_bottom_corners">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_manage_bottom_actions"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manage_bottom_actions" />
-
-            </RelativeLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/settings_recycle_bin_label"
-            style="@style/SettingsSectionLabelStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/recycle_bin" />
-
-        <LinearLayout
-            android:id="@+id/settings_recycle_bin_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_margin"
-            android:background="@drawable/section_holder_stroke"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/settings_use_recycle_bin_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_top_corners">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_use_recycle_bin"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/move_items_into_recycle_bin" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_show_recycle_bin_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_show_recycle_bin"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_recycle_bin" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_show_recycle_bin_last_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_background">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_show_recycle_bin_last"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_recycle_bin_last" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_empty_recycle_bin_holder"
-                style="@style/SettingsHolderTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ripple_bottom_corners">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_empty_recycle_bin_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/empty_recycle_bin" />
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_empty_recycle_bin_size"
-                    style="@style/SettingsTextValueStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_empty_recycle_bin_label"
-                    tools:text="0 B" />
-
-            </RelativeLayout>
-        </LinearLayout>
 
         <TextView
             android:id="@+id/settings_migrating_label"

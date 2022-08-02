@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.lifecycle.LifecycleService
+import com.bruhascended.cv.ImageCategory
 import com.bruhascended.cv.ImageModel
 import com.bruhascended.cv.RunTimeAnalyzer
 import com.simplemobiletools.gallery.pro.BuildConfig
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.math.round
 
-class FeatureExtractorService: LifecycleService() {
+class ExcludedRemoverService: LifecycleService() {
     private lateinit var imageModel: ImageModel
     private lateinit var notificationManager: NotificationManager
     private var jobActive = false
@@ -54,11 +55,9 @@ class FeatureExtractorService: LifecycleService() {
         startForeground(ONGOING_NOTIFICATION_ID, getNotification())
 
         CoroutineScope(Dispatchers.IO).launch {
-            directoryDao.getAllFlow().collect {
+            directoryDao.getAll().also {
                 if (it.isNotEmpty()) {
-                    processQueue(it) { eta, done, total ->
-                        notificationManager.notify(ONGOING_NOTIFICATION_ID, getNotification(eta, done, total))
-                    }
+                    processQueue(it)
                     notificationManager.cancel(ONGOING_NOTIFICATION_ID)
                     stopForeground(true)
                     stopSelf()
@@ -69,59 +68,27 @@ class FeatureExtractorService: LifecycleService() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    private fun processQueue(directories: List<Directory>, progressCallback: (eta: Long, done: Int, total: Int) -> Unit) {
-        var totalCount = 0
-        var doneCount = 0
-        var allCount = 0
+    private fun processQueue(directories: List<Directory>) {
         val excludedDirectories = config.excludedFolders
         for (dir in directories) {
-            if (excludedDirectories.any { dir.path.startsWith(it) }) continue
             for (medium in mediaDB.getMediaFromPathWithPredictions(dir.path)) {
-                if (medium.isQueuedForProcessing) {
-                    totalCount++
-                }
-                allCount++
-            }
-        }
-        val runTimeAnalyzer = RunTimeAnalyzer(BuildConfig.DEBUG)
-        for (dir in directories) {
-            if (excludedDirectories.any { dir.path.startsWith(it) }) continue
-            for (medium in mediaDB.getMediaFromPathWithPredictions(dir.path)) {
-                if (medium.isQueuedForProcessing) {
-                    mediaDB.updateMediumProcessStart(medium.path, Calendar.getInstance().timeInMillis)
-                    val bm = BitmapFactory.decodeFile(medium.path) ?: continue
-                    val preds = imageModel.fetchResults(bm)
-                    val (category, conf) = preds.getCategory()
-                    mediaDB.updateMediumPredictions(medium.path, preds, category, conf)
-                    if (conf >= config.imageCategoryThreshold) {
-                        categoryDao.addToSizeOfCategory(category, medium.size, 1)
-                    }
-                    runTimeAnalyzer.log()
-                    val eta = ((totalCount - doneCount) * (runTimeAnalyzer.movingAverage ?: .0)).toLong()
-                    progressCallback(eta, doneCount, totalCount)
-                    doneCount++
+                if (excludedDirectories.any {
+                        medium.path.startsWith(it)
+                }) {
+                    categoryDao.addToSizeOfCategory(medium.category ?: ImageCategory.Other, -medium.size, -1)
+                    mediaDB.deleteMediumPath(medium.path)
                 }
             }
         }
     }
 
-    private fun getNotification(eta: Long = 0, done: Int = 0, total: Int = 0): Notification {
-        val sec = (eta / 1000) % 60
-        val min = round((eta / 1000) / 60.0).toInt()
-        val etaStr = if (total > 0) {
-            when {
-                sec > 90 -> getString(R.string.x_mins_remaining, min)
-                sec > 15 -> getString(R.string.less_than_min_remaining)
-                sec > 3 -> getString(R.string.just_few_secs)
-                else -> getString(R.string.finishing_up)
-            }
-        } else ""
+    private fun getNotification(): Notification {
         return Notification.Builder(this, applicationContext.packageName)
-            .setContentTitle(getString(R.string.organising_your_gallery) + " " + etaStr)
+            .setContentTitle("Removing excluded folders.")
             .setSmallIcon(R.mipmap.ic_app_launcher)
             .setContentIntent(pendingIntent)
             .setTicker(getText(R.string.organising_your_gallery))
-            .setProgress(total, done, total == 0)
+            .setProgress(0,0, true)
             .build()
     }
 

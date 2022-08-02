@@ -14,7 +14,6 @@ import com.simplemobiletools.commons.models.RadioItem
 import com.simplemobiletools.gallery.pro.R
 import com.simplemobiletools.gallery.pro.dialogs.ChangeFileThumbnailStyleDialog
 import com.simplemobiletools.gallery.pro.dialogs.ChangeFolderThumbnailStyleDialog
-import com.simplemobiletools.gallery.pro.dialogs.ManageBottomActionsDialog
 import com.simplemobiletools.gallery.pro.dialogs.ManageExtendedDetailsDialog
 import com.simplemobiletools.gallery.pro.extensions.*
 import com.simplemobiletools.gallery.pro.helpers.*
@@ -45,32 +44,20 @@ class SettingsActivity : SimpleActivity() {
         setupFileLoadingPriority()
         setupManageIncludedFolders()
         setupManageExcludedFolders()
-        setupManageHiddenFolders()
-        setupShowHiddenItems()
-        setupAutoplayVideos()
-        setupRememberLastVideo()
-        setupLoopVideos()
-        setupOpenVideosOnSeparateScreen()
         setupMaxBrightness()
         setupCropThumbnails()
         setupDarkBackground()
         setupScrollHorizontally()
         setupScreenRotation()
         setupHideSystemUI()
-        setupHiddenItemPasswordProtection()
-        setupExcludedItemPasswordProtection()
         setupAppPasswordProtection()
         setupFileDeletionPasswordProtection()
-        setupDeleteEmptyFolders()
         setupAllowPhotoGestures()
-        setupAllowVideoGestures()
         setupAllowDownGesture()
         setupAllowRotatingWithGestures()
         setupShowNotch()
-        setupBottomActions()
         setupFileThumbnailStyle()
         setupFolderThumbnailStyle()
-        setupKeepLastModified()
         setupEnablePullToRefresh()
         setupAllowZoomingImages()
         setupShowHighestQuality()
@@ -80,11 +67,6 @@ class SettingsActivity : SimpleActivity() {
         setupHideExtendedDetails()
         setupManageExtendedDetails()
         setupSkipDeleteConfirmation()
-        setupManageBottomActions()
-        setupUseRecycleBin()
-        setupShowRecycleBin()
-        setupShowRecycleBinLast()
-        setupEmptyRecycleBin()
         updateTextColors(settings_holder)
         setupClearCache()
         setupExportSettings()
@@ -92,9 +74,9 @@ class SettingsActivity : SimpleActivity() {
         invalidateOptionsMenu()
 
         arrayOf(
+            settings_threshold_label,
             settings_color_customization_label,
             settings_general_settings_label,
-            settings_videos_label,
             settings_thumbnails_label,
             settings_scrolling_label,
             settings_fullscreen_media_label,
@@ -102,17 +84,16 @@ class SettingsActivity : SimpleActivity() {
             settings_extended_details_label,
             settings_security_label,
             settings_file_operations_label,
-            settings_bottom_actions_label,
-            settings_recycle_bin_label,
             settings_migrating_label
         ).forEach {
             it.setTextColor(getProperPrimaryColor())
         }
 
         arrayOf(
+            settings_category_threshold_holder,
+            settings_object_threshold_holder,
             settings_color_customization_holder,
             settings_general_settings_holder,
-            settings_videos_holder,
             settings_thumbnails_holder,
             settings_scrolling_holder,
             settings_fullscreen_media_holder,
@@ -120,8 +101,6 @@ class SettingsActivity : SimpleActivity() {
             settings_extended_details_holder,
             settings_security_holder,
             settings_file_operations_holder,
-            settings_bottom_actions_holder,
-            settings_recycle_bin_holder,
             settings_migrating_holder
         ).forEach {
             it.background.applyColorFilter(getProperBackgroundColor().getContrastColor())
@@ -209,70 +188,6 @@ class SettingsActivity : SimpleActivity() {
         }
     }
 
-    private fun setupManageHiddenFolders() {
-        settings_manage_hidden_folders_holder.beGoneIf(isQPlus())
-        settings_manage_hidden_folders_holder.setOnClickListener {
-            handleHiddenFolderPasswordProtection {
-                startActivity(Intent(this, HiddenFoldersActivity::class.java))
-            }
-        }
-    }
-
-    private fun setupShowHiddenItems() {
-        if (isRPlus() && !isExternalStorageManager()) {
-            settings_show_hidden_items_holder.beGone()
-            settings_manage_excluded_folders_holder.background = resources.getDrawable(R.drawable.ripple_bottom_corners, theme)
-        }
-
-        settings_show_hidden_items.isChecked = config.showHiddenMedia
-        settings_show_hidden_items_holder.setOnClickListener {
-            if (config.showHiddenMedia) {
-                toggleHiddenItems()
-            } else {
-                handleHiddenFolderPasswordProtection {
-                    toggleHiddenItems()
-                }
-            }
-        }
-    }
-
-    private fun toggleHiddenItems() {
-        settings_show_hidden_items.toggle()
-        config.showHiddenMedia = settings_show_hidden_items.isChecked
-    }
-
-    private fun setupAutoplayVideos() {
-        settings_autoplay_videos.isChecked = config.autoplayVideos
-        settings_autoplay_videos_holder.setOnClickListener {
-            settings_autoplay_videos.toggle()
-            config.autoplayVideos = settings_autoplay_videos.isChecked
-        }
-    }
-
-    private fun setupRememberLastVideo() {
-        settings_remember_last_video_position.isChecked = config.rememberLastVideoPosition
-        settings_remember_last_video_position_holder.setOnClickListener {
-            settings_remember_last_video_position.toggle()
-            config.rememberLastVideoPosition = settings_remember_last_video_position.isChecked
-        }
-    }
-
-    private fun setupLoopVideos() {
-        settings_loop_videos.isChecked = config.loopVideos
-        settings_loop_videos_holder.setOnClickListener {
-            settings_loop_videos.toggle()
-            config.loopVideos = settings_loop_videos.isChecked
-        }
-    }
-
-    private fun setupOpenVideosOnSeparateScreen() {
-        settings_open_videos_on_separate_screen.isChecked = config.openVideosOnSeparateScreen
-        settings_open_videos_on_separate_screen_holder.setOnClickListener {
-            settings_open_videos_on_separate_screen.toggle()
-            config.openVideosOnSeparateScreen = settings_open_videos_on_separate_screen.isChecked
-        }
-    }
-
     private fun setupMaxBrightness() {
         settings_max_brightness.isChecked = config.maxBrightness
         settings_max_brightness_holder.setOnClickListener {
@@ -315,52 +230,6 @@ class SettingsActivity : SimpleActivity() {
         settings_hide_system_ui_holder.setOnClickListener {
             settings_hide_system_ui.toggle()
             config.hideSystemUI = settings_hide_system_ui.isChecked
-        }
-    }
-
-    private fun setupHiddenItemPasswordProtection() {
-        settings_hidden_item_password_protection_holder.beGoneIf(isRPlus() && !isExternalStorageManager())
-        settings_hidden_item_password_protection.isChecked = config.isHiddenPasswordProtectionOn
-        settings_hidden_item_password_protection_holder.setOnClickListener {
-            val tabToShow = if (config.isHiddenPasswordProtectionOn) config.hiddenProtectionType else SHOW_ALL_TABS
-            SecurityDialog(this, config.hiddenPasswordHash, tabToShow) { hash, type, success ->
-                if (success) {
-                    val hasPasswordProtection = config.isHiddenPasswordProtectionOn
-                    settings_hidden_item_password_protection.isChecked = !hasPasswordProtection
-                    config.isHiddenPasswordProtectionOn = !hasPasswordProtection
-                    config.hiddenPasswordHash = if (hasPasswordProtection) "" else hash
-                    config.hiddenProtectionType = type
-
-                    if (config.isHiddenPasswordProtectionOn) {
-                        val confirmationTextId = if (config.hiddenProtectionType == PROTECTION_FINGERPRINT)
-                            R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
-                        ConfirmationDialog(this, "", confirmationTextId, R.string.ok, 0) { }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setupExcludedItemPasswordProtection() {
-        settings_excluded_item_password_protection_holder.beGoneIf(settings_hidden_item_password_protection_holder.isVisible())
-        settings_excluded_item_password_protection.isChecked = config.isExcludedPasswordProtectionOn
-        settings_excluded_item_password_protection_holder.setOnClickListener {
-            val tabToShow = if (config.isExcludedPasswordProtectionOn) config.excludedProtectionType else SHOW_ALL_TABS
-            SecurityDialog(this, config.excludedPasswordHash, tabToShow) { hash, type, success ->
-                if (success) {
-                    val hasPasswordProtection = config.isExcludedPasswordProtectionOn
-                    settings_excluded_item_password_protection.isChecked = !hasPasswordProtection
-                    config.isExcludedPasswordProtectionOn = !hasPasswordProtection
-                    config.excludedPasswordHash = if (hasPasswordProtection) "" else hash
-                    config.excludedProtectionType = type
-
-                    if (config.isExcludedPasswordProtectionOn) {
-                        val confirmationTextId = if (config.excludedProtectionType == PROTECTION_FINGERPRINT)
-                            R.string.fingerprint_setup_successfully else R.string.protection_setup_successfully
-                        ConfirmationDialog(this, "", confirmationTextId, R.string.ok, 0) { }
-                    }
-                }
-            }
         }
     }
 
@@ -408,27 +277,11 @@ class SettingsActivity : SimpleActivity() {
         }
     }
 
-    private fun setupDeleteEmptyFolders() {
-        settings_delete_empty_folders.isChecked = config.deleteEmptyFolders
-        settings_delete_empty_folders_holder.setOnClickListener {
-            settings_delete_empty_folders.toggle()
-            config.deleteEmptyFolders = settings_delete_empty_folders.isChecked
-        }
-    }
-
     private fun setupAllowPhotoGestures() {
         settings_allow_photo_gestures.isChecked = config.allowPhotoGestures
         settings_allow_photo_gestures_holder.setOnClickListener {
             settings_allow_photo_gestures.toggle()
             config.allowPhotoGestures = settings_allow_photo_gestures.isChecked
-        }
-    }
-
-    private fun setupAllowVideoGestures() {
-        settings_allow_video_gestures.isChecked = config.allowVideoGestures
-        settings_allow_video_gestures_holder.setOnClickListener {
-            settings_allow_video_gestures.toggle()
-            config.allowVideoGestures = settings_allow_video_gestures.isChecked
         }
     }
 
@@ -478,16 +331,6 @@ class SettingsActivity : SimpleActivity() {
             else -> R.string.rounded_corners
         }
     )
-
-    private fun setupKeepLastModified() {
-        settings_keep_last_modified.isChecked = config.keepLastModified
-        settings_keep_last_modified_holder.setOnClickListener {
-            handleMediaManagementPrompt {
-                settings_keep_last_modified.toggle()
-                config.keepLastModified = settings_keep_last_modified.isChecked
-            }
-        }
-    }
 
     private fun setupEnablePullToRefresh() {
         settings_enable_pull_to_refresh.isChecked = config.enablePullToRefresh
@@ -613,112 +456,6 @@ class SettingsActivity : SimpleActivity() {
             else -> R.string.screen_rotation_aspect_ratio
         }
     )
-
-    private fun setupBottomActions() {
-        settings_bottom_actions_checkbox.isChecked = config.bottomActions
-        updateManageBottomActionsButtons()
-        settings_bottom_actions_checkbox_holder.setOnClickListener {
-            settings_bottom_actions_checkbox.toggle()
-            config.bottomActions = settings_bottom_actions_checkbox.isChecked
-            updateManageBottomActionsButtons()
-        }
-    }
-
-    private fun setupManageBottomActions() {
-        settings_manage_bottom_actions_holder.setOnClickListener {
-            ManageBottomActionsDialog(this) {
-                if (config.visibleBottomActions == 0) {
-                    settings_bottom_actions_checkbox_holder.callOnClick()
-                    config.bottomActions = false
-                    config.visibleBottomActions = DEFAULT_BOTTOM_ACTIONS
-                }
-            }
-        }
-    }
-
-    private fun updateManageBottomActionsButtons() {
-        settings_manage_bottom_actions_holder.beVisibleIf(config.bottomActions)
-        if (config.bottomActions) {
-            settings_bottom_actions_checkbox_holder.background = resources.getDrawable(R.drawable.ripple_top_corners, theme)
-        } else {
-            settings_bottom_actions_checkbox_holder.background = resources.getDrawable(R.drawable.ripple_all_corners, theme)
-        }
-    }
-
-    private fun setupUseRecycleBin() {
-        updateRecycleBinButtons()
-        settings_use_recycle_bin.isChecked = config.useRecycleBin
-        settings_use_recycle_bin_holder.setOnClickListener {
-            settings_use_recycle_bin.toggle()
-            config.useRecycleBin = settings_use_recycle_bin.isChecked
-            updateRecycleBinButtons()
-        }
-    }
-
-    private fun setupShowRecycleBin() {
-        settings_show_recycle_bin.isChecked = config.showRecycleBinAtFolders
-        settings_show_recycle_bin_holder.setOnClickListener {
-            settings_show_recycle_bin.toggle()
-            config.showRecycleBinAtFolders = settings_show_recycle_bin.isChecked
-            updateRecycleBinButtons()
-        }
-    }
-
-    private fun setupShowRecycleBinLast() {
-        settings_show_recycle_bin_last.isChecked = config.showRecycleBinLast
-        settings_show_recycle_bin_last_holder.setOnClickListener {
-            settings_show_recycle_bin_last.toggle()
-            config.showRecycleBinLast = settings_show_recycle_bin_last.isChecked
-            if (config.showRecycleBinLast) {
-                config.removePinnedFolders(setOf(RECYCLE_BIN))
-            }
-        }
-    }
-
-    private fun updateRecycleBinButtons() {
-        settings_show_recycle_bin_last_holder.beVisibleIf(config.useRecycleBin && config.showRecycleBinAtFolders)
-        settings_empty_recycle_bin_holder.beVisibleIf(config.useRecycleBin)
-        settings_show_recycle_bin_holder.beVisibleIf(config.useRecycleBin)
-
-        if (config.useRecycleBin) {
-            settings_use_recycle_bin_holder.background = resources.getDrawable(R.drawable.ripple_top_corners, theme)
-        } else {
-            settings_use_recycle_bin_holder.background = resources.getDrawable(R.drawable.ripple_all_corners, theme)
-        }
-    }
-
-    private fun setupEmptyRecycleBin() {
-        ensureBackgroundThread {
-            try {
-                mRecycleBinContentSize = mediaDB.getDeletedMedia().sumByLong { medium ->
-                    val size = medium.size
-                    if (size == 0L) {
-                        val path = medium.path.removePrefix(RECYCLE_BIN).prependIndent(recycleBinPath)
-                        File(path).length()
-                    } else {
-                        size
-                    }
-                }
-            } catch (ignored: Exception) {
-            }
-
-            runOnUiThread {
-                settings_empty_recycle_bin_size.text = mRecycleBinContentSize.formatSize()
-            }
-        }
-
-        settings_empty_recycle_bin_holder.setOnClickListener {
-            if (mRecycleBinContentSize == 0L) {
-                toast(R.string.recycle_bin_empty)
-            } else {
-                showRecycleBinEmptyingDialog {
-                    emptyTheRecycleBin()
-                    mRecycleBinContentSize = 0L
-                    settings_empty_recycle_bin_size.text = 0L.formatSize()
-                }
-            }
-        }
-    }
 
     private fun setupClearCache() {
         ensureBackgroundThread {

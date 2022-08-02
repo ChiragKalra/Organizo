@@ -16,7 +16,7 @@ class CleanupManager(mContext: Context) {
             .setRequiresCharging(true)
             .build()
 
-        val request = PeriodicWorkRequestBuilder<DeleteWork>(1, TimeUnit.DAYS)
+        val request = PeriodicWorkRequestBuilder<DeleteWork>(7, TimeUnit.DAYS)
             .addTag(imageCategory.name)
             .setConstraints(constraints)
             .setInputData(
@@ -46,7 +46,7 @@ class CleanupManager(mContext: Context) {
         const val DURATION_ID = "DURATION_ID"
 
         enum class Duration (val timeInMs: Long, val fullName: String) {
-            Never(20 * 365 * 24 * 60 * 60 * 1000L, "Never"),
+            Never(1000L * 365 * 24 * 60 * 60 * 1000L, "Never"),
             Day(24 * 60 * 60 * 1000L, "One Day"),
             Week(7 * 24 * 60 * 60 * 1000L, "One Week"),
             Month(30 * 24 * 60 * 60 * 1000L, "One Month"),

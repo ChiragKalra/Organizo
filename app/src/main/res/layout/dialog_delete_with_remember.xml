@@ -17,6 +17,7 @@
         android:textSize="@dimen/bigger_text_size" />
 
     <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+        android:visibility="gone"
         android:id="@+id/delete_remember_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

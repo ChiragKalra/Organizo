@@ -50,6 +50,11 @@
             android:enabled="true"
             android:exported="false" />
 
+        <service
+            android:name=".services.ExcludedRemoverService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".activities.SplashActivity"
             android:exported="false"

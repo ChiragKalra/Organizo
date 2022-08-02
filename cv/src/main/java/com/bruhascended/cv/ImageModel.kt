@@ -13,7 +13,8 @@ import org.tensorflow.lite.support.image.ops.ResizeOp.ResizeMethod.BILINEAR
 import org.tensorflow.lite.support.model.Model
 
 class ImageModel (
-    context: Context
+    context: Context,
+    private val extractObjects: Boolean = false,
 ) {
 
     private val inputDim = 224
@@ -44,11 +45,12 @@ class ImageModel (
 
     fun fetchResults(bitmap: Bitmap): Predictions {
         var tensor = objectProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
-        val objectConfidences = objectModel
+        val objectConfidences = if (extractObjects) objectModel
             .process(tensor)
             .detectionResultList
             .filter { it.scoreAsFloat >= 0.5 }
             .map { it.categoryAsString to it.scoreAsFloat }
+        else emptyList()
 
         tensor = categoryProcessor.process(TensorImage(DataType.FLOAT32).apply { load(bitmap) })
         val categoryConfidences = categoryModel

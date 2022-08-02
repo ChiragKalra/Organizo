@@ -34,6 +34,7 @@ import com.simplemobiletools.gallery.pro.interfaces.MediaOperationsListener
 import com.simplemobiletools.gallery.pro.models.Medium
 import com.simplemobiletools.gallery.pro.models.ThumbnailItem
 import com.simplemobiletools.gallery.pro.models.ThumbnailSection
+import com.simplemobiletools.gallery.pro.services.CleanupManager
 import kotlinx.android.synthetic.main.activity_media.*
 import java.io.File
 import java.io.IOException
@@ -70,6 +71,8 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
     private var mStoredTextColor = 0
     private var mStoredPrimaryColor = 0
     private var mStoredThumbnailSpacing = 0
+    private var deleteWorkCategory: ImageCategory? = null
+    private var deleteWorkDuration: CleanupManager.Companion.Duration? = null
 
     companion object {
         var mMedia = ArrayList<ThumbnailItem>()
@@ -84,11 +87,16 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
             mIsGetVideoIntent = getBooleanExtra(GET_VIDEO_INTENT, false)
             mIsGetAnyIntent = getBooleanExtra(GET_ANY_INTENT, false)
             mAllowPickingMultiple = getBooleanExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
+            var k = getIntExtra("CATEGORY", -1)
+            deleteWorkCategory = if (k == -1) null else ImageCategory.values()[k]
+             k = getIntExtra("DURATION", -1)
+            deleteWorkDuration = if (k == -1) null else CleanupManager.Companion.Duration.values()[k]
         }
 
         media_refresh_layout.setOnRefreshListener { getMedia() }
         try {
-            mCategory = ImageCategory.values()[intent.getIntExtra(DIRECTORY, ImageCategory.Other.ordinal)]
+            mCategory = if (deleteWorkCategory != null) deleteWorkCategory!!
+            else ImageCategory.values()[intent.getIntExtra(DIRECTORY, ImageCategory.Other.ordinal)]
         } catch (e: Exception) {
             showErrorToast(e)
             finish()
@@ -287,7 +295,10 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
     private fun tryLoadGallery() {
         handlePermission(PERMISSION_WRITE_STORAGE) {
             if (it) {
-                updateActionBarTitle(mCategory.fullName)
+                updateActionBarTitle(
+                    if (deleteWorkCategory == null) mCategory.fullName
+                    else "Delete ${deleteWorkCategory!!.fullName} Images"
+                )
                 getMedia()
                 setupLayoutManager()
             } else {
@@ -331,6 +342,16 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
             handleGridSpacing()
         } else {
             searchQueryChanged(mLastSearchedText)
+        }
+
+        if (deleteWorkCategory != null) {
+            Handler(mainLooper).postDelayed(
+                {
+                    (media_grid.adapter as MediaAdapter?)?.selectAllMedia()
+                    (media_grid.adapter as MediaAdapter?)?.checkDeleteConfirmation()
+                },
+                300
+            )
         }
 
         setupScrollDirection()
@@ -462,7 +483,15 @@ class MediaCategoryActivity : SimpleActivity(), MediaOperationsListener {
         mIsGettingMedia = true
 
         ensureBackgroundThread {
-            val it = mediaDB.getMediaFromCategory(mCategory, config.imageCategoryThreshold)
+            val excluded = config.excludedFolders
+            val it = if (deleteWorkCategory == null) {
+                mediaDB.getMediaFromCategory(mCategory, config.imageCategoryThreshold).filter { medium ->
+                    !excluded.any { medium.path.startsWith(it) }
+                }
+            } else {
+                mediaDB.getMediaFromCategory(deleteWorkCategory!!, config.imageCategoryThreshold)
+                    .filter { deleteWorkDuration!!.isOlder(this, it.modified) }
+            }
             gotMedia(arrayListOf<ThumbnailItem>().apply {
                 addAll(it)
             }, isFromCache = true)

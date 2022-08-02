@@ -16,7 +16,7 @@ class ScheduleDeletionDialog(
         var selection = manager.getDuration(imageCategory).ordinal
         activity.toast("Note: All files permission must be granted for this feature to work.")
         AlertDialog.Builder(activity)
-            .setTitle("Schedule automatic deletion for images older than:")
+            .setTitle("Schedule weekly deletion reminders for images older than:")
             .setSingleChoiceItems(Duration.values().map { it.fullName }.toTypedArray(), selection) { _, select ->
                 selection = select
             }

@@ -1,5 +1,6 @@
 package com.simplemobiletools.gallery.pro.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,8 @@ import com.simplemobiletools.commons.interfaces.RefreshRecyclerViewListener
 import com.simplemobiletools.gallery.pro.R
 import com.simplemobiletools.gallery.pro.adapters.ManageFoldersAdapter
 import com.simplemobiletools.gallery.pro.extensions.config
+import com.simplemobiletools.gallery.pro.services.ExcludedRemoverService
+import com.simplemobiletools.gallery.pro.services.FeatureExtractorService
 import kotlinx.android.synthetic.main.activity_manage_folders.*
 
 class ExcludedFoldersActivity : SimpleActivity(), RefreshRecyclerViewListener {
@@ -53,6 +56,11 @@ class ExcludedFoldersActivity : SimpleActivity(), RefreshRecyclerViewListener {
             else -> return super.onOptionsItemSelected(item)
         }
         return true
+    }
+
+    override fun onDestroy() {
+        startForegroundService(Intent(this, ExcludedRemoverService::class.java))
+        return super.onDestroy()
     }
 
     override fun refreshItems() {
