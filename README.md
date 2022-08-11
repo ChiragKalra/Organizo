@@ -7,10 +7,12 @@ Organizo helps you clean up your gallery and organise it.
 First release is available in releases.
 
 ## Screenshots
+<p>
 <img src="https://user-images.githubusercontent.com/24735099/184189642-5bf15932-9796-45a5-ad5a-f6839730c600.png" alt="drawing" width="160"/>
 <img src="https://user-images.githubusercontent.com/24735099/184189745-e64c5ba9-3ac5-4dea-8904-9b77cb1c24ec.png" alt="drawing" width="160"/>
 <img src="https://user-images.githubusercontent.com/24735099/184189707-d7210dae-8a57-4d36-a756-a2e04b770db4.png" alt="drawing" width="160"/>
 <img src="https://user-images.githubusercontent.com/24735099/184189752-9e56389c-43d3-4828-8aa8-92f6932f8b34.png" alt="drawing" width="160"/>
+</p>
 
 ## Related Projects
 * Code used to generate the tensorflow model at it's core : https://github.com/ChiragKalra/OrganizoCV
