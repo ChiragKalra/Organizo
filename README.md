@@ -1,7 +1,9 @@
 # Organizo
 
 ## About
-Organizo helps you clean up your gallery and organise it.
+Organizo helps you clean up your gallery and organise it. 
+
+With features such as drag to select and daily reminders to delete very old images, you can easily delete useless images directly from the app. 
 
 ## Usage
 First release is available in releases.
