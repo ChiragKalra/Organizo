@@ -1,7 +1,7 @@
-# Organizo
+# Dust It
 
 ## About
-Organizo helps you clean up your gallery and organise it. 
+Dust It helps you clean up your gallery and organise it. 
 
 With features such as drag to select and daily reminders to delete very old images, you can easily delete useless images directly from the app. 
 
